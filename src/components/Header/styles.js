@@ -9,6 +9,10 @@ export const Container = styled.div`
   align-items: center;
   border-bottom: 3px solid #ffffff;
 
+  @media only screen and (max-width: 600px) {
+      width: 100%;
+    }
+    
   section{
     margin-left: 10px;
     width:37%;

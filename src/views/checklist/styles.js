@@ -11,7 +11,6 @@ export const Container = styled.div`
     flex-direction: column;
     margin-top: 10px;
   }
-  
 
   span{
     width: 100%;

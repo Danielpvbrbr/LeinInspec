@@ -18,6 +18,10 @@ export const Area = styled.section`
     align-items: center ;
     background-color: #d9d9d9;
     border-radius: 5px;
+
+    @media only screen and (max-width: 600px) {
+      width: 98%;
+    }
 `;
 
 export const Header = styled.section`

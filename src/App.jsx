@@ -64,7 +64,7 @@ export default function App() {
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-    overflow: hidden;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,5 +79,9 @@ const Area = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media only screen and (max-width: 600px) {
+      width: 100%;
+  }
 `;
 

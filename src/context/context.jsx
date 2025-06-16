@@ -7,14 +7,13 @@ export const AuthContext = createContext({});
 export default function AuthProvider({ children }) {
     const [auth, setAuth] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [listCheck, setListCheck] = useState([]);
 
     useEffect(() => {
         const token = localStorage.getItem("auth");
         if (token) {
             const cookie = JSON.parse(token)
             setAuth(cookie)
-            console.log(cookie.exp)
-            console.log(expirado(cookie.exp))
             if (expirado(cookie.exp)) {
                 alert("Tempo expirado!")
                 logout()
@@ -286,6 +285,8 @@ export default function AuthProvider({ children }) {
             alert(message);
             listGrupo()
             setLoading(false)
+            const res = await listCheckout();
+            setListCheck(res.data);
             return response.data
         } catch (err) {
             setLoading(false)
@@ -338,7 +339,9 @@ export default function AuthProvider({ children }) {
                 sendUsuarios,
                 listUsuarios,
                 atualizarUsuarios,
-                deleteUsuarios
+                deleteUsuarios,
+                listCheck,
+                setListCheck
             }}
         >
             {children}

@@ -12,7 +12,6 @@ export const Container = styled.div`
     margin-top: 10px;
   }
   
-
   span{
     width: 100%;
     display: flex;

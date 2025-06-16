@@ -8,11 +8,10 @@ import { gerarPDF } from "./func/gerarPDF"
 import { getPeriodoInicioDoMes } from "./func/periodo"
 
 export default function Inicio({ setIsForm }) {
-  const { listCheckout } = useContext(AuthContext);
-  const [listCheck, setListCheck] = useState([]);
+  const { listCheckout, listCheck, setListCheck } = useContext(AuthContext);
+  const [] = useState([]);
   const [search, setSearch] = useState("");
   const [periodo, setPeriodo] = useState(getPeriodoInicioDoMes());
-  const printRef = useRef();
 
   useEffect(() => {
     const run = async () => {
@@ -22,18 +21,17 @@ export default function Inicio({ setIsForm }) {
     run();
   }, []);
 
-const filtrados = listCheck.filter(v => {
-  const inicio = new Date(`${periodo.start}T00:00:00`);
-  const fim = new Date(`${periodo.end}T23:59:59`);
-  const dataItem = new Date(v.dataHora); // deve estar em formato ISO
+  const filtrados = listCheck.filter(v => {
+    const inicio = new Date(`${periodo.start}T00:00:00`);
+    const fim = new Date(`${periodo.end}T23:59:59`);
+    const dataItem = new Date(v.dataHora); // deve estar em formato ISO
 
-  return (
-    dataItem >= inicio &&
-    dataItem <= fim &&
-    v.veiculo?.toLowerCase().includes(search.toLowerCase())
-  );
-});
-
+    return (
+      dataItem >= inicio &&
+      dataItem <= fim &&
+      v.veiculo?.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   return (
     <Container>
@@ -50,7 +48,7 @@ const filtrados = listCheck.filter(v => {
           <LineInfo
             key={i}
             data={v}
-            />
+          />
         )}
       </List>
       <ButtonSend onClick={() => setIsForm(true)} />

@@ -3,10 +3,14 @@ import { styled } from 'styled-components';
 export const Container = styled.div`
   width: 600px;
   height: 100%;
-  background-color: #D9D9D9;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 600px) {
+      width: 100%;
+  }
 `;
 export const Area = styled.div`
   width: 60%;

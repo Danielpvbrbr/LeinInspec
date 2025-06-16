@@ -20,6 +20,10 @@ export const Area = styled.section`
     justify-content: center;
     margin-top: -2px;
 
+   @media only screen and (max-width: 600px) {
+      width: 50%;
+      margin-left: -50%;
+   }
 `;
 
 export const Header = styled.section`

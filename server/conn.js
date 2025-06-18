@@ -7,7 +7,8 @@ const pool = mysql.createPool({
   database: 'checklister',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  dateStrings: true
 });
 
 module.exports = pool.promise();

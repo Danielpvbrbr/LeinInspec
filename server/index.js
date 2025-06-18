@@ -12,6 +12,10 @@ const { checkout_listar, checkout_register } = require('./routes/checkout');
 app.use(cors())
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send(`Servidor rodando na porta ${PORT}`)
+})
+
 app.post('/auth', auth);
 app.get("/usuarios/listar", usuarios_listar)
 app.post("/usuarios/register", register)

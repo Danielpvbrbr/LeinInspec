@@ -19,8 +19,8 @@ export default function Checkout({ isForm, setIsForm }) {
   const [observacao, setObservacao] = useState("")
   const [listCheckout, setListCheckout] = useState([])
 
-  const handleSubmit = () => {
 
+  const handleSubmit = () => {
     if (veiculo && veiculo) {
       const res = sendCheckout({
         condutor: condutor,
@@ -29,7 +29,7 @@ export default function Checkout({ isForm, setIsForm }) {
         usuario: user.user,
         observacao: observacao,
         listCheckout: JSON.stringify(listCheckout),
-        dataHora: formatDate()
+        dataHora: formatDateToMySQL(new Date())
       })
 
       if (res) {
@@ -42,19 +42,14 @@ export default function Checkout({ isForm, setIsForm }) {
 
   }
 
-  function limpar() {
+  function limpar(date) {
     setCondutor("")
     setVeiculo("")
     setObservacao("")
   }
 
-  function formatDate() {
-    const date = new Date()
-    const dateLc = date.toLocaleDateString()
-    let [dia, mes, ano] = dateLc.split("/")
-    const dataForm = `${ano}-${mes}-${dia}`
-
-    return `${dataForm} ${date.toLocaleTimeString()}`
+  function formatDateToMySQL(date) {
+    return date.toISOString().slice(0, 19).replace('T', ' ');
   }
 
   useEffect(() => {

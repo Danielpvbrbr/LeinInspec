@@ -6,17 +6,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  fieldset{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-  }
-
-   fieldset p{
-   font-size: 11pt;
-   margin-bottom: 3px;
-  }
-
   span{
     width: 100%;
     display: flex;
@@ -35,27 +24,13 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
-fieldset section{
-  width: 100%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  font-size: 12pt;
-  border-radius: 5px;
-  background-color: #46545E;
-  color: #fff;
-  justify-content: space-between;
-  margin-bottom: 3px;
-  cursor: pointer;
-}
-
-fieldset section h4{
-  margin-left: 10px;
-}
-fieldset section svg{
-  margin-right: 10px;
-  cursor: pointer;
-}
+  fieldset section h4{
+    margin-left: 10px;
+  }
+  fieldset section svg{
+    margin-right: 10px;
+    cursor: pointer;
+  }
 `;
 
 export const Input = styled.div`
@@ -77,10 +52,33 @@ export const Input = styled.div`
     border: none;
     outline:none;
     margin-right: 4px;
-    border-radius: 5px;
   }
+
   h4{
     margin-right: 4px;
     font-size: 10pt;
+  }
+`;
+
+export const List = styled.fieldset`
+    height: 420px;
+    margin-top: 10px;
+    overflow-y: auto;
+    /* ::-webkit-scrollbar{
+      display: none;
+    } */
+
+    section{
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      font-size: 12pt;
+      border-radius: 5px;
+      background-color: #46545E;
+      color: #fff;
+      justify-content: space-between;
+      margin-bottom: 3px;
+      cursor: pointer;
   }
 `;

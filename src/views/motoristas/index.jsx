@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Container, Input } from "./styles"
+import { Container, List, Input } from "./styles"
 import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 
@@ -46,7 +46,7 @@ export default function Motoristas() {
       <fieldset>
         <legend>{name.id ? "Atualizar Registro" : "Adicionar Novo"}</legend>
 
-         <p>Nome do Motorista</p>
+        <p  style={{marginTop:3,marginBottom:3}}>Nome do Motorista</p>
         <Input style={{
           backgroundColor: name.id ? "#89a0c2" : "#fff",
           color: name.id ? "#ffffff" : "#000000"
@@ -85,15 +85,19 @@ export default function Motoristas() {
           }
         </span>
       </fieldset>
-      <fieldset >
+      <List >
         <legend>Lista de Motoristas</legend>
         {list.map((v, i) =>
-          <section key={i} onClick={() => setName({ id: v.id, name: v.descricao })}>
+          <section
+            key={i}
+            onClick={() => setName({ id: v.id, name: v.descricao })}
+            style={{ background: v.id == name.id ? "#39913d" : "#46545E" }}
+          >
             <h4>{v.descricao}</h4>
             <BsXLg color='#ffffff' onClick={() => deleteMotorista({ id: v.id })} />
           </section>
         )}
-      </fieldset>
+      </List>
     </Container>
   )
 }

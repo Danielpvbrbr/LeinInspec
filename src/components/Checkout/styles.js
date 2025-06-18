@@ -47,6 +47,7 @@ export const List = styled.section`
     height: 72%;
     /* border: 1px solid red; */
     margin-bottom: 2px;
+    overflow-y: auto;
 `;
 
 export const InfoOption = styled.div`

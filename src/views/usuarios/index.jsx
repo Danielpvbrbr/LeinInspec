@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Container, Input } from "./styles"
+import { Container, List, Input } from "./styles"
 import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 
@@ -120,17 +120,21 @@ export default function Usuarios() {
         </span>
       </fieldset>
 
-      <fieldset>
+      <List>
         <legend>Lista de Usuários</legend>
         {list.map((v, i) =>
-          <section style={{ background: (v.user == "admin") && "#000000" }} key={i} onClick={() => !(v.user == "admin") && setUser({ id: v.id, user: v.user })}>
+          <section
+           style={{
+            background: (v.user == "admin")
+              && "#000000"
+          }} key={i} onClick={() => !(v.user == "admin") && setUser({ id: v.id, user: v.user })}>
             <h4>{v.user}</h4>
             {
               !(v.user == "admin") && <BsXLg color='#ffffff' onClick={() => deleteUser(v)} />
             }
           </section>
         )}
-      </fieldset>
+      </List>
     </Container>
   )
 }

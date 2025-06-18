@@ -19,6 +19,7 @@ export default function Checkout({ isForm, setIsForm }) {
   const [observacao, setObservacao] = useState("")
   const [listCheckout, setListCheckout] = useState([])
 
+
   const handleSubmit = () => {
     if (veiculo && veiculo) {
       const res = sendCheckout({
@@ -67,7 +68,7 @@ export default function Checkout({ isForm, setIsForm }) {
     }
 
     run();
-  }, []);
+  }, [isForm]);
 
 
   return (

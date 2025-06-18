@@ -8,6 +8,7 @@ export default function AuthProvider({ children }) {
     const [auth, setAuth] = useState(null);
     const [loading, setLoading] = useState(false);
     const [listCheck, setListCheck] = useState([]);
+    const [listGrupoArr, setListGrupoArr] = useState([])
 
     useEffect(() => {
         const token = localStorage.getItem("auth");
@@ -19,14 +20,19 @@ export default function AuthProvider({ children }) {
                 logout()
             }
         }
-
     }, []);
+    function gerarExpiracao() {
+        const agora = new Date();
+        const exp = new Date(agora.getTime() + 60 * 60 * 1000).toLocaleString(); // +1 hora
+        return { agora, exp };
+    }
 
     const login = async (val) => {
+        const { exp } = gerarExpiracao()
         setLoading(true);
         try {
             const response = await api.post('/auth', val);
-            const { message, id, user, exp } = response.data
+            const { message, id, user } = response.data
             localStorage.setItem("auth", JSON.stringify({ id, user, exp }));
             setAuth({ id, user })
             // console.log(message);
@@ -341,7 +347,9 @@ export default function AuthProvider({ children }) {
                 atualizarUsuarios,
                 deleteUsuarios,
                 listCheck,
-                setListCheck
+                setListCheck,
+                listGrupoArr,
+                setListGrupoArr
             }}
         >
             {children}

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { Container, Input } from "./styles"
+import { Container, List, Input } from "./styles"
 import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 
@@ -54,7 +54,7 @@ export default function Veículos() {
       <fieldset>
         <legend>{name.id ? "Atualizar Registro" : "Adicionar Novo"}</legend>
 
-        <p>Nome do Veiculo *</p>
+        <p style={{ marginTop: 3, marginBottom: 3 }}>Nome do Veiculo *</p>
         <Input style={{
           backgroundColor: name.id ? "#89a0c2" : "#fff",
           color: name.id ? "#ffffff" : "#000000"
@@ -71,7 +71,7 @@ export default function Veículos() {
           }
         </Input>
 
-        <p>Placa do Veiculo</p>
+        <p style={{ marginTop: 3, marginBottom: 3 }}>Placa do Veiculo</p>
         <Input style={{
           backgroundColor: name.id ? "#89a0c2" : "#fff",
           color: name.id ? "#ffffff" : "#000000"
@@ -110,18 +110,23 @@ export default function Veículos() {
           }
         </span>
       </fieldset>
-      <fieldset >
+      <List >
         <legend>Lista de Veículos</legend>
         {list.map((v, i) =>
-          <section onClick={() => {
-            setName({ id: v.id, name: v.descricao }),
-              setPlaca(v.placa)
-          }}>
-            <h4>{v.descricao} - ({v.placa})</h4>
+          <section
+            key={i}
+            onClick={() => {
+              setName({ id: v.id, name: v.descricao });
+              setPlaca(v.placa);
+            }}
+            style={{ background: v.id == name.id ? "#39913d" : "#46545E" }}
+          >
+            <h4>{v.descricao}</h4>
             <BsXLg color='#ffffff' onClick={() => deleteVeiculo({ id: v.id })} />
           </section>
         )}
-      </fieldset>
+
+      </List>
     </Container>
   )
 }

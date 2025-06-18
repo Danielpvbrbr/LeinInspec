@@ -14,7 +14,7 @@ export const Container = styled.div`
     }
     
   section{
-    margin-left: 10px;
+    margin-left: 5px;
     width:37%;
   }
 

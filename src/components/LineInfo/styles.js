@@ -27,11 +27,12 @@ export const Container = styled.div`
 
 export const Area = styled.section`
   width: 97%;
+  max-height:450px;
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-top: 5px;
-
+  overflow-y:auto
 `;
 
 export const Line = styled.div`

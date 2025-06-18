@@ -1,6 +1,5 @@
 const db = require('../conn');
 const bcrypt = require('bcrypt'); // se as senhas forem armazenadas com hash
-const { expiracao } = require("./func/gerarExpiracao")
 
 exports.usuarios_listar = async (req, res) => {
 
@@ -37,12 +36,11 @@ exports.auth = async (req, res) => {
         if (!senhaCorreta) {
             return res.status(401).json({ error: 'Senha incorreta' });
         }
-        console.log(expiracao)
+
         res.json({
             message: 'Login realizado com sucesso',
             user: rows[0].user,
-            id: rows[0].id,
-            exp: expiracao
+            id: rows[0].id
         });
     } catch (err) {
         console.error(err);

@@ -38,6 +38,16 @@ export default function Motoristas() {
   async function run() {
     const res = await listMotorista();
     setList(res.data);
+  }
+
+  function removerItem({ name, id }) {
+    if (window.confirm(`Deseja realmente excluir ${name}?`)) {
+      deleteMotorista({ id: id })
+      limparCampo()
+    }
+  }
+
+  function limparCampo() {
     setName({ id: "", name: "" })
   }
 
@@ -46,7 +56,7 @@ export default function Motoristas() {
       <fieldset>
         <legend>{name.id ? "Atualizar Registro" : "Adicionar Novo"}</legend>
 
-        <p  style={{marginTop:3,marginBottom:3}}>Nome do Motorista</p>
+        <p style={{ marginTop: 3, marginBottom: 3 }}>Nome do Motorista</p>
         <Input style={{
           backgroundColor: name.id ? "#89a0c2" : "#fff",
           color: name.id ? "#ffffff" : "#000000"
@@ -72,14 +82,14 @@ export default function Motoristas() {
           {name.id &&
             <button
               type='button'
-              onClick={() => deleteMotorista({ id: name.id })}
+              onClick={() => removerItem({ name: name.name, id: name.id })}
               style={{ background: "#ca5858" }}
             >Excluir</button>
           }
           {
             <button
               type='button'
-              onClick={() => setName({ id: "", name: "" })}
+              onClick={limparCampo}
               style={{ background: "#5886ca" }}
             >Limpar</button>
           }
@@ -94,7 +104,7 @@ export default function Motoristas() {
             style={{ background: v.id == name.id ? "#39913d" : "#46545E" }}
           >
             <h4>{v.descricao}</h4>
-            <BsXLg color='#ffffff' onClick={() => deleteMotorista({ id: v.id })} />
+            <BsXLg color='#ffffff' onClick={() => removerItem({ name: v.descricao, id: v.id })} />
           </section>
         )}
       </List>

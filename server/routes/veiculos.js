@@ -17,7 +17,7 @@ exports.veiculo_listar = async (req, res) => {
 };
 
 exports.veiculo_register = async (req, res) => {
-    const { descricao, placa } = req.body;
+    const { descricao, foto, placa } = req.body;
 
     if (!descricao) {
         return res.status(400).json({ error: 'Nome são obrigatório' });
@@ -25,7 +25,7 @@ exports.veiculo_register = async (req, res) => {
 
     try {
         const [result] = await db.query(
-            'INSERT INTO veiculos (descricao, placa) VALUES (?,?)', [descricao, placa]
+            'INSERT INTO veiculos (descricao, foto, placa) VALUES (?,?,?)', [descricao, foto, placa]
         );
 
         res.status(201).json({ message: 'Veiculo registrado com sucesso', id: result.insertId });
@@ -53,14 +53,14 @@ exports.veiculo_delete = async (req, res) => {
 };
 
 exports.veiculo_atualizar = async (req, res) => {
-    const { descricao, placa, id } = req.body;
+    const { descricao, placa, foto, id } = req.body;
 
     if (!id) {
         return res.status(400).json({ error: 'Descrição são obrigatório' });
     }
 
     try {
-        const [result] = await db.query('UPDATE veiculos SET descricao=?, placa=? WHERE id=?', [descricao, placa, id]);
+        const [result] = await db.query('UPDATE veiculos SET descricao=?, foto=?, placa=? WHERE id=?', [descricao, foto, placa, id]);
 
         res.status(201).json({ message: 'Veiculo Atualizado com sucesso', id: result.insertId });
     } catch (err) {

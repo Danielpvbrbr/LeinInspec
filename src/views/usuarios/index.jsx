@@ -46,14 +46,19 @@ export default function Usuarios() {
   async function run() {
     const res = await listUsuarios();
     setList(res.data);
-    setUser({ id: "", user: "" });
   }
-  const deleteUser = (id) => {
-    if (window.confirm("Deseja realmente deletar esse usuário?")) {
+
+  const deleteUser = ({ id, name }) => {
+    if (window.confirm(`Deseja realmente excluir ${name}?`)) {
       deleteUsuarios({ id: id })
+      limparCampo()
     }
   }
 
+  function limparCampo() {
+    setUser({ id: "", user: "" });
+    setPassword("");
+  }
   return (
     <Container>
       <fieldset>
@@ -105,16 +110,13 @@ export default function Usuarios() {
           {user.id &&
             <button
               type='button'
-              onClick={() => deleteUser(user.id)}
+              onClick={() => deleteUser({ id: user.id, name: user.user })}
               style={{ background: "#ca5858" }}
             >Excluir</button>
           }
           <button
             type='button'
-            onClick={() => {
-              setUser({ id: "", user: "" });
-              setPassword("");
-            }}
+            onClick={limparCampo}
             style={{ background: "#5886ca" }}
           >Limpar</button>
         </span>
@@ -124,13 +126,13 @@ export default function Usuarios() {
         <legend>Lista de Usuários</legend>
         {list.map((v, i) =>
           <section
-           style={{
-            background: (v.user == "admin")
-              && "#000000"
-          }} key={i} onClick={() => !(v.user == "admin") && setUser({ id: v.id, user: v.user })}>
+            style={{
+              background: (v.user == "admin")
+                && "#000000"
+            }} key={i} onClick={() => !(v.user == "admin") && setUser({ id: v.id, user: v.user })}>
             <h4>{v.user}</h4>
             {
-              !(v.user == "admin") && <BsXLg color='#ffffff' onClick={() => deleteUser(v)} />
+              !(v.user == "admin") && <BsXLg color='#ffffff' onClick={() => deleteUser({ id: v.id, name: v.user })} />
             }
           </section>
         )}

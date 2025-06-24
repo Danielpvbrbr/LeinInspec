@@ -4,12 +4,12 @@ import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 import InputUniversal from '../../components/InputUniversal';
 
-export default function Motoristas() {
+export default function Oficina() {
   const {
-    sendMotorista,
-    listMotorista,
-    deleteMotorista,
-    atualizarMotorista
+    sendOficina,
+    listOficina,
+    deleteOficina,
+    atualizarOficina
   } = useContext(AuthContext)
   const [name, setName] = useState({ id: "", name: "" })
   const [list, setList] = useState([])
@@ -17,33 +17,33 @@ export default function Motoristas() {
   const handleSubmit = async () => {
     if (name) {
       if (name.id) {
-        atualizarMotorista({
+        atualizarOficina({
           descricao: name.name,
           id: name.id
         })
       } else {
-        sendMotorista({ descricao: name.name })
+        sendOficina({ descricao: name.name })
       }
 
       setName({ id: "", name: "" })
       return await run()
     }
 
-    alert("Campo motorista vazio! ")
+    alert("Campo Oficina vazio! ")
   }
 
   useEffect(() => {
     run()
-  }, [deleteMotorista])
+  }, [deleteOficina])
 
   async function run() {
-    const res = await listMotorista();
+    const res = await listOficina();
     setList(res.data);
   }
 
   function removerItem({ name, id }) {
     if (window.confirm(`Deseja realmente excluir ${name}?`)) {
-      deleteMotorista({ id: id })
+      deleteOficina({ id: id })
       limparCampo()
     }
   }
@@ -57,10 +57,10 @@ export default function Motoristas() {
       <fieldset>
         <legend>{name.id ? "Atualizar Registro" : "Adicionar Novo"}</legend>
         <InputUniversal
-          titulo="Nome da Motorista"
+          titulo="Nome da oficina"
           type='text'
           value={name.name}
-          placeholder='Digite o nome do Motorista...'
+          placeholder='Digite o nome do oficina...'
           onChange={e => setName({ id: name.id, name: e.target.value })}
           maxLength={35}
         />
@@ -87,7 +87,7 @@ export default function Motoristas() {
         </span>
       </fieldset>
       <List >
-        <legend>Lista de Motoristas</legend>
+        <legend>Lista de Oficina</legend>
         {list.map((v, i) =>
           <section
             key={i}

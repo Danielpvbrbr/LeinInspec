@@ -31,10 +31,43 @@ export const Container = styled.div`
     margin-right: 10px;
     cursor: pointer;
   }
+
+`;
+
+export const AreaInfo = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+  align-items: center;
+  gap: 5px;
+
+  input[type=date]{
+   width:100px;
+   height: 34px;
+  }
+
+  div{
+    width:100%;
+  }
+
+  section input{
+    border:1px solid #496B83; 
+    color: #496B83;
+    border-radius: 5px;
+  }
+
+  section p{
+    font-size: 10pt;
+    color: #496B83;
+  }
+  
+
 `;
 
 export const List = styled.fieldset`
-    height: 420px;
+    height: 480px;
     margin-top: 10px;
     overflow-y: auto;
     /* ::-webkit-scrollbar{
@@ -48,7 +81,7 @@ export const List = styled.fieldset`
       align-items: center;
       font-size: 12pt;
       border-radius: 5px;
-      background-color: #46545E;
+      background-color: ${p => p.bk};
       color: #fff;
       justify-content: space-between;
       margin-bottom: 3px;

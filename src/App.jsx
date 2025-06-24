@@ -7,9 +7,14 @@ import Motoristas from './views/motoristas';
 import Veiculos from './views/veiculos';
 import Checklist from './views/checklist';
 import Usuarios from './views/usuarios';
+import Manutencao from './views/manutencao';
+import Oficina from './views/oficina';
+
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+
 import { AuthContext } from './context/context';
+
 
 export default function App() {
   const { isAuthenticated } = useContext(AuthContext)
@@ -28,7 +33,11 @@ export default function App() {
       case 3:
         return <Checklist />
       case 4:
+        return <Oficina />
+      case 5:
         return <Usuarios />
+      case 6:
+        return <Manutencao />
     }
   }
 

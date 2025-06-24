@@ -34,7 +34,7 @@ export const Container = styled.div`
 `;
 
 export const List = styled.fieldset`
-    height: 420px;
+    height: 520px;
     margin-top: 10px;
     overflow-y: auto;
     /* ::-webkit-scrollbar{
@@ -48,7 +48,7 @@ export const List = styled.fieldset`
       align-items: center;
       font-size: 12pt;
       border-radius: 5px;
-      background-color: #46545E;
+      background-color: ${p=>p.bk};
       color: #fff;
       justify-content: space-between;
       margin-bottom: 3px;

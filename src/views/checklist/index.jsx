@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
-import { Container, List, Input } from "./styles"
+import { Container, List } from "./styles"
 import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
-
+import InputUniversal from '../../components/InputUniversal';
 export default function Checklist() {
   const {
     sendGrupo,
@@ -55,23 +55,15 @@ export default function Checklist() {
     <Container>
       <fieldset>
         <legend>{name.id ? "Atualizar Registro" : "Adicionar Novo"}</legend>
-        <p style={{ marginTop: 3, marginBottom: 3 }}>Nome do Item</p>
-        <Input style={{
-          backgroundColor: name.id ? "#89a0c2" : "#fff",
-          color: name.id ? "#ffffff" : "#000000"
-        }}>
-          <input
-            type='text'
-            value={name.name}
-            placeholder='Digite o nome do Motorista...'
-            onChange={e => setName({ id: name.id, name: e.target.value })}
 
-          />
-          {name.id &&
-            <h4>{name.id}</h4>
-          }
-        </Input>
-
+        <InputUniversal
+          titulo="Nome do item"
+          type='text'
+          value={name.name}
+          placeholder='Digite o nome do item...'
+          onChange={e => setName({ id: name.id, name: e.target.value })}
+          maxLength={35}
+        />
         <span>
           <button
             type='button'

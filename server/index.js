@@ -8,13 +8,11 @@ const { listar, motor_register, motor_delete, motor_atualizar } = require('./rou
 const { veiculo_listar, veiculo_register, veiculo_delete, veiculo_atualizar } = require('./routes/veiculos');
 const { grupo_listar, grupo_register, grupo_delete, grupo_atualizar } = require('./routes/grupos');
 const { checkout_listar, checkout_register } = require('./routes/checkout');
+const { oficina_listar, oficina_register, oficina_delete, oficina_atualizar } = require('./routes/oficina');
+const { manute_listar, manute_register, manute_delete, manute_atualizar } = require('./routes/manutencao');
 
 app.use(cors())
 app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.send(`Servidor rodando na porta ${PORT}`)
-})
 
 app.post('/auth', auth);
 app.get("/usuarios/listar", usuarios_listar)
@@ -40,6 +38,16 @@ app.post("/grupo/atualizar", grupo_atualizar)
 app.get("/checkout/listar", checkout_listar)
 app.post("/checkout/register", checkout_register)
 //app.post("/checkout/delete", checkout_delete)
+
+app.get("/oficina/listar", oficina_listar)
+app.post("/oficina/register", oficina_register)
+app.post("/oficina/delete", oficina_delete)
+app.post("/oficina/atualizar", oficina_atualizar)
+
+app.get("/manutencao/listar", manute_listar)
+app.post("/manutencao/register", manute_register)
+app.post("/manutencao/delete", manute_delete)
+app.post("/manutencao/atualizar", manute_atualizar)
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

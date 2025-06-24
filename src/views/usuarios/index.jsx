@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
-import { Container, List, Input } from "./styles"
+import { Container, List } from "./styles"
 import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
+import InputUniversal from '../../components/InputUniversal';
 
 export default function Usuarios() {
   const {
@@ -63,41 +64,25 @@ export default function Usuarios() {
     <Container>
       <fieldset>
         <legend>{user.id ? "Atualizar Registro" : "Adicionar Novo"}</legend>
+        <InputUniversal
+          titulo="Usuário"
+          type='text'
+          value={user.user}
+          placeholder='Digite o usuário...'
+          onChange={e => setUser({ id: user.id, user: e.target.value })}
+          autoComplete="new-username"
+          maxLength={10}
+        />
 
-        <p>Usuário</p>
-        <Input
-          style={{
-            backgroundColor: user.id ? "#89a0c2" : "#fff",
-            color: user.id ? "#ffffff" : "#000000",
-            marginBottom: 3
-          }}>
-          <input
-            type='text'
-            value={user.user}
-            placeholder='Digite o usuário...'
-            onChange={e => setUser({ id: user.id, user: e.target.value })}
-            autoComplete="new-username"
-            maxLength={10}
-          />
-          {user.id && <h4>{user.id}</h4>}
-        </Input>
-
-        <p>Senha</p>
-        <Input
-          style={{
-            backgroundColor: user.id ? "#89a0c2" : "#fff",
-            color: user.id ? "#ffffff" : "#000000"
-          }}>
-          <input
-            type='password'
-            value={password}
-            placeholder='Digite a senha...'
-            onChange={e => setPassword(e.target.value)}
-            autoComplete="new-password"
-            maxLength={6}
-          />
-          {user.id && <h4>{user.id}</h4>}
-        </Input>
+        <InputUniversal
+          titulo="Senha"
+          type='password'
+          value={password}
+          placeholder='Digite a senha...'
+          onChange={e => setPassword(e.target.value)}
+          autoComplete="new-password"
+          maxLength={6}
+        />
 
         <span>
           <button

@@ -26,7 +26,7 @@ export const Area = styled.section`
 
 export const Header = styled.section`
     width: 100%;
-    height: 42px;
+    height: 35px;
     background-color: #D9D9D9;
     display: flex;
     justify-content: center;
@@ -36,7 +36,7 @@ export const Header = styled.section`
     border-top-right-radius: 5px;
 
     h4{
-      font-size: 12pt;
+      font-size: 11pt;
       color: #496B83;
       font-weight: 500;
     }
@@ -44,7 +44,7 @@ export const Header = styled.section`
 
 export const List = styled.section`
     width: 97%;
-    height: 72%;
+    height: 69%;
     /* border: 1px solid red; */
     margin-bottom: 2px;
     overflow-y: auto;
@@ -55,8 +55,8 @@ export const InfoOption = styled.div`
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
-    gap:3px;
-    margin-top: 5px;
+    gap:2px;
+    
     select{
       width: 100%;
       height: 35px;

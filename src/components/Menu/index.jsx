@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { Container, Area, Header, ListLine, Line } from "./styles"
 import { BsChevronDoubleLeft, BsChevronCompactDown, BsChevronCompactRight } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
-
+import { version } from '../../../package.json'
 export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
   const { user, logout } = useContext(AuthContext)
   const [isMn, setIsMn] = useState(0)
@@ -39,13 +39,20 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
                 <p onClick={() => { setMenuSelect(1), setisMenu(false) }}>Motoristas</p>
                 <p onClick={() => { setMenuSelect(2, setisMenu(false)) }}>Veiculos</p>
                 <p onClick={() => { setMenuSelect(3), setisMenu(false) }}>Grupo de Checklist</p>
+                <p onClick={() => { setMenuSelect(4, setisMenu(false)) }}>Oficinas</p>
               </>
             }
           </Line>
 
           <Line>
-            <span onClick={() => { setMenuSelect(4), setisMenu(false) }}>
+            <span onClick={() => { setMenuSelect(5), setisMenu(false) }}>
               <h4>Usuário</h4>
+            </span>
+          </Line>
+
+          <Line>
+            <span onClick={() => { setMenuSelect(6), setisMenu(false) }}>
+              <h4>Manutenção</h4>
             </span>
           </Line>
         </ListLine>
@@ -62,6 +69,7 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
         <Line>
           <span onClick={() => { logout(), setisMenu(false) }}>
             <h4>Trocar Usúario</h4>
+            <strong style={{ fontSize: 10, marginRight: 3,color:"#5f5c5c" }}>{version}</strong>
           </span>
         </Line>
       </Area>

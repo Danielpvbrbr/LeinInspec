@@ -1,18 +1,17 @@
 import { useState, useEffect, useContext } from 'react'
 import { Container, Area, Header, InfoOption, List, Line, LineText, Action } from "./styles"
 import { AuthContext } from '../../context/context'
+import SelectVeiculo from '../SelectVeiculo'
+import SelectMotorista from '../SelectMotorista'
+import { formatDate } from '../functions/formatDate'
 
 export default function Checkout({ isForm, setIsForm }) {
   const {
     user,
     listGrupo,
-    listMotorista,
-    listVeiculo,
     sendCheckout
   } = useContext(AuthContext)
   const [listGroup, setListGroup] = useState([])
-  const [listVeic, setListVeiculo] = useState([])
-  const [listMotor, setListMotorista] = useState([])
   const [condutor, setCondutor] = useState("")
   const [veiculo, setVeiculo] = useState("")
   const [placa, setPlaca] = useState("")
@@ -48,24 +47,10 @@ export default function Checkout({ isForm, setIsForm }) {
     setObservacao("")
   }
 
-  function formatDate() {
-    const date = new Date()
-    const dateLc = date.toLocaleDateString()
-    let [dia, mes, ano] = dateLc.split("/")
-    const dataForm = `${ano}-${mes}-${dia}`
-
-    return `${dataForm} ${date.toLocaleTimeString()}`
-  }
-
   useEffect(() => {
     async function run() {
       const res_grupo = await listGrupo();
-      const res_veiculo = await listVeiculo();
-      const res_listMotorista = await listMotorista();
-
       setListGroup(res_grupo.data);
-      setListVeiculo(res_veiculo.data);
-      setListMotorista(res_listMotorista.data);
       setListCheckout(res_grupo.data.map(item => ({
         name: item.descricao,
         check: false
@@ -83,31 +68,15 @@ export default function Checkout({ isForm, setIsForm }) {
           <h4>Check List Diário do Veículo</h4>
         </Header>
         <InfoOption>
-          <p>Motorista *</p>
-          <select value={condutor} onChange={e => setCondutor(e.target.value)}>
-            <option value="" selected={true}>Selecione o Motorista</option>
-            {listMotor.map((v, i) =>
-              <option key={i} value={v.descricao}>{v.descricao}</option>
-            )}
-          </select>
-          <p>Veiculo *</p>
-          <select
-            value={veiculo}
-            onChange={e => {
-              const selected = e.target.value;
-              setVeiculo(selected);
-
-              const veiculoSelecionado = listVeic.find(v => v.descricao === selected);
-              if (veiculoSelecionado) {
-                setPlaca(veiculoSelecionado.placa);
-              }
-            }}
-          >
-            <option value="" selected={true} >Selecione o Veiculo</option>
-            {listVeic.map((v, i) =>
-              <option key={i} value={v.descricao}>{v.descricao}</option>
-            )}
-          </select>
+          <SelectMotorista
+            condutor={condutor}
+            setCondutor={setCondutor}
+          />
+          <SelectVeiculo
+            veiculo={veiculo}
+            setVeiculo={setVeiculo}
+            setPlaca={setPlaca}
+          />
         </InfoOption>
         <List>
           {listGroup.map((v, i) => {

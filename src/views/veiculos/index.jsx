@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect, useRef } from 'react'
-import { Container, AreaForm, ContainerForm, Form, List, AreaPhoto, Input, AreaInput } from "./styles"
+import { Container, AreaForm, ContainerForm, Form, List, AreaPhoto, AreaInput } from "./styles"
 import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
+import InputUniversal from '../../components/InputUniversal';
 
 export default function Veículos() {
   const {
@@ -59,6 +60,7 @@ export default function Veículos() {
       setName({ id: "", name: "" })
       setPlaca("")
       setImgB64("")
+      limparCampo()
     }
   }
 
@@ -89,36 +91,25 @@ export default function Veículos() {
         <ContainerForm>
           <Form>
             <AreaInput>
-              <p style={{ marginTop: 3, marginBottom: 3 }}>Nome do Veiculo *</p>
-              <Input style={{
-                backgroundColor: name.id ? "#89a0c2" : "#fff",
-                color: name.id ? "#ffffff" : "#000000"
-              }}>
-                <input
-                  type='text'
-                  value={name.name}
-                  placeholder='Digite o nome do Veiculo...'
-                  onChange={e => setName(prev => ({ ...prev, name: e.target.value }))}
-                />
-                {name.id && <h4>{name.id}</h4>}
-              </Input>
+              <InputUniversal
+                titulo="Nome do Veiculo"
+                type='text'
+                value={name.name}
+                placeholder='Digite o nome do Veiculo...'
+                onChange={e => setName(prev => ({ ...prev, name: e.target.value }))}
+                maxLength={30}
+              />
             </AreaInput>
 
             <AreaInput>
-              <p style={{ marginTop: 3, marginBottom: 3 }}>Placa do Veiculo</p>
-              <Input style={{
-                backgroundColor: name.id ? "#89a0c2" : "#fff",
-                color: name.id ? "#ffffff" : "#000000"
-              }}>
-                <input
-                  type='text'
-                  value={placa.toLocaleUpperCase()}
-                  placeholder='Digite a placa do Veículo...'
-                  onChange={e => setPlaca(e.target.value)}
-                  maxLength={7}
-                />
-                {name.id && <h4>{name.id}</h4>}
-              </Input>
+              <InputUniversal
+                titulo="Placa do Veiculo"
+                type='text'
+                value={placa.toLocaleUpperCase()}
+                placeholder='Digite a placa do Veículo...'
+                onChange={e => setPlaca(e.target.value)}
+                maxLength={7}
+              />
             </AreaInput>
           </Form>
           <AreaPhoto onClick={() => fotoRef.current.click()}>
@@ -182,6 +173,8 @@ export default function Veículos() {
             />
           </section>
         )}
+
+
       </List>
     </Container >
   )

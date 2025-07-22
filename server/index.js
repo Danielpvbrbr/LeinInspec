@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 5157; //ser for modo cliente mudar para 9000
 const { auth, register, usuarios_listar, usuarios_delete, usuarios_atualizar } = require('./routes/auth');
 const { listar, motor_register, motor_delete, motor_atualizar } = require('./routes/motorista');
 const { veiculo_listar, veiculo_register, veiculo_delete, veiculo_atualizar } = require('./routes/veiculos');
@@ -13,6 +14,9 @@ const { manute_listar, manute_register, manute_delete, manute_atualizar } = requ
 
 app.use(cors())
 app.use(express.json());
+
+const distPath = path.join(__dirname, 'dist'); //Modo Deploy
+app.use(express.static(distPath)); //Modo Deploy
 
 app.post('/auth', auth);
 app.get("/usuarios/listar", usuarios_listar)
@@ -48,6 +52,11 @@ app.get("/manutencao/listar", manute_listar)
 app.post("/manutencao/register", manute_register)
 app.post("/manutencao/delete", manute_delete)
 app.post("/manutencao/atualizar", manute_atualizar)
+
+
+app.get('*', (req, res) => { //Modo deploy
+    res.sendFile(path.join(distPath, 'index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

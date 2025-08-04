@@ -15,7 +15,7 @@ export default function Checkout({ isForm, setIsForm }) {
   const [condutor, setCondutor] = useState("")
   const [veiculo, setVeiculo] = useState("")
   const [placa, setPlaca] = useState("")
-  const [km, setKm] = useState("")
+  const [km, setKm] = useState(0)
   const [observacao, setObservacao] = useState("")
   const [listCheckout, setListCheckout] = useState([])
 
@@ -47,6 +47,7 @@ export default function Checkout({ isForm, setIsForm }) {
     setCondutor("")
     setVeiculo("")
     setObservacao("")
+    setKm(0)
   }
 
   useEffect(() => {
@@ -86,7 +87,8 @@ export default function Checkout({ isForm, setIsForm }) {
             maxLength={10}
             placeholder='Informe KM'
             pattern="[0-9]*"
-            onChange={e => setKm(e.target.value)} />
+            onChange={e => setKm(e.target.value)}
+          />
         </InfoOption>
         <List>
           {listGroup.map((v, i) => {

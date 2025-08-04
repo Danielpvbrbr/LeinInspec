@@ -5,7 +5,10 @@ export const sendManutencao = async (val) => {
         const response = await api.post('/manutencao/register', val);
         const { message } = response.data
         alert(message);
-        listManutencao()
+
+        if (typeof listManutencao === 'function') {
+            listManutencao()
+        }
         return response.data;
     } catch (err) {
 
@@ -20,7 +23,11 @@ export const deleteManutencao = async (val) => {
         const response = await api.post('/manutencao/delete', val);
         const { message } = response.data
         alert(message);
-        listManutencao()
+
+        if (typeof listManutencao === 'function') {
+            listManutencao()
+        }
+
         return response.data;
     } catch (err) {
 
@@ -35,7 +42,10 @@ export const atualizarManutencao = async (val) => {
         const response = await api.post('/manutencao/atualizar', val);
         const { message } = response.data
         alert(message);
-        listManutencao()
+
+        if (typeof listManutencao === 'function') {
+            listManutencao()
+        }
         return response.data;
     } catch (err) {
         alert(err?.response?.data?.error)

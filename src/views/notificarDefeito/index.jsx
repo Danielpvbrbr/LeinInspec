@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Container, List } from "./styles"
+import { Container, List, LineText } from "./styles"
 import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 import InputUniversal from '../../components/InputUniversal';
@@ -20,6 +20,9 @@ export default function notificarDefeito() {
   const [placa, setPlaca] = useState("")
 
   const handleSubmit = async () => {
+    if (name.name.length < 10) {
+      return alert("Ops! Parece que esta tentando salvar um observação menor, descreva mais um pouco! ")
+    }
     if (veiculo) {
       if (name.id) {
         await atualizarDefeito({
@@ -93,14 +96,24 @@ export default function notificarDefeito() {
           setVeiculo={setVeiculo}
           setPlaca={setPlaca}
         />
-        <InputUniversal
+        {/* <InputUniversal
           titulo="Defeito"
           type='text'
           value={name.name}
           placeholder='Digite o defeito...'
           onChange={e => setName({ id: name.id, name: e.target.value })}
           maxLength={35}
-        />
+        /> */}
+        <LineText>
+          <h4>Obervação/Defeito</h4>
+          <textarea
+            type='checkbox'
+            placeholder='Digite sua observação, maior que 10 Caracteres'
+            maxLength={200}
+            value={name.name}
+            onChange={e => setName({ id: name.id, name: e.target.value })}
+          />
+        </LineText>
         <span>
           <button
             type='button'
@@ -145,7 +158,9 @@ export default function notificarDefeito() {
 
             <span>
               <p>Defeito</p>
-              <p style={{ fontSize: 13 }}>{v.descricao}</p>
+              <p style={{ fontSize: 13 }}>
+                {(v.descricao ?? "").toString().slice(0, 80)}
+              </p>
             </span>
 
             <span>

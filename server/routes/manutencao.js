@@ -17,7 +17,7 @@ exports.manute_listar = async (req, res) => {
 };
 
 exports.manute_register = async (req, res) => {
-    const { descricao, oficina, garantiaDate, dataCreate, veiculo, placa, servicesArray } = req.body;
+    const { descricao, oficina, garantiaDate, dataCreate, veiculo, placa, servicesArray, km } = req.body;
 
     if (!descricao) {
         return res.status(400).json({ error: 'Nome são obrigatório' });
@@ -25,8 +25,8 @@ exports.manute_register = async (req, res) => {
 
     try {
         const [result] = await db.query(
-            'INSERT INTO manutencao (descricao, oficina, garantiaDate, dataCreate, veiculo, placa, servicesArray) VALUES (?,?,?,?,?,?,?)',
-            [descricao, oficina, garantiaDate, dataCreate, veiculo, placa, servicesArray]
+            'INSERT INTO manutencao (descricao, oficina, garantiaDate, dataCreate, veiculo, placa, servicesArray, km) VALUES (?,?,?,?,?,?,?,?)',
+            [descricao, oficina, garantiaDate, dataCreate, veiculo, placa, servicesArray, km]
         );
 
         res.status(201).json({ message: 'Manutencão registrado com sucesso', id: result.insertId });
@@ -54,15 +54,15 @@ exports.manute_delete = async (req, res) => {
 };
 
 exports.manute_atualizar = async (req, res) => {
-    const { descricao, oficina, garantiaDate, veiculo, placa, servicesArray, id } = req.body;
+    const { descricao, oficina, garantiaDate, veiculo, placa, servicesArray, id, km } = req.body;
 
     if (!id) {
         return res.status(400).json({ error: 'Descrição são obrigatório' });
     }
 
     try {
-        const [result] = await db.query('UPDATE manutencao SET descricao=?, oficina=?, garantiaDate=?, veiculo=?, placa=?, servicesArray=? WHERE id=?',
-            [descricao, oficina, garantiaDate, veiculo, placa, servicesArray, id]);
+        const [result] = await db.query('UPDATE manutencao SET descricao=?, oficina=?, garantiaDate=?, veiculo=?, placa=?, servicesArray=?, km=? WHERE id=?',
+            [descricao, oficina, garantiaDate, veiculo, placa, servicesArray, km, id]);
 
         res.status(201).json({ message: 'Manutencão Atualizado com sucesso', id: result.insertId });
     } catch (err) {

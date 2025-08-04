@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Container, AreaInfo, ListServico, Line, AreaServic, ButtonList } from "./styles"
+import { Container, AreaInfo, ListServico, Line, AreaServic, ButtonList, InputKM } from "./styles"
 import { BsXLg, BsArrowRepeat, BsPlusSquareFill, BsEraserFill } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 import SelectVeiculo from '../../components/SelectVeiculo';
@@ -26,6 +26,7 @@ export default function Manutencao() {
   const [isList, setIsList] = useState(false)
   const [listServico, setListServico] = useState([])
   const [idItemServ, setIdItemServ] = useState("")
+  const [km, setKm] = useState(0);
 
   const handleSubmit = async () => {
 
@@ -40,7 +41,8 @@ export default function Manutencao() {
           veiculo: veiculo,
           placa: placa,
           servicesArray: servicesArray,
-          id: id
+          id: id,
+          km: km
         })
       } else {
         await sendManutencao({
@@ -50,7 +52,8 @@ export default function Manutencao() {
           veiculo: veiculo,
           placa: placa,
           dataCreate: formatDate(),
-          servicesArray: servicesArray
+          servicesArray: servicesArray,
+          km: km
         })
       }
       limparCampo()
@@ -78,6 +81,7 @@ export default function Manutencao() {
     setPlaca("")
     setGarantiaDate("")
     setListServico([])
+    setKm(0)
   }
 
   function getValues(v) {
@@ -89,6 +93,7 @@ export default function Manutencao() {
     setPlaca(v.placa)
     setGarantiaDate(v.garantiaDate ? v.garantiaDate.substring(0, 10) : '');
     setListServico(JSON.parse(v?.servicesArray))
+    setKm(v.km)
   }
 
   function handleSend() {
@@ -142,6 +147,18 @@ export default function Manutencao() {
               onChange={e => setGarantiaDate(e.target.value)}
             />
           </section>
+          <section>
+            <p>KM Atual</p>
+            <InputKM
+              type='number'
+              value={km}
+              maxLength={10}
+              placeholder='Informe KM'
+              pattern="[0-9]*"
+              onChange={e => setKm(e.target.value)}
+            />
+          </section>
+
         </AreaInfo>
 
         <SelectOficina

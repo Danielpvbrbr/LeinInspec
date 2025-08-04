@@ -66,3 +66,28 @@ export const List = styled.fieldset`
     border-bottom: 1px solid #ddd;
   }
 `;
+export const LineText = styled.section`
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+
+    h4{
+      margin: 8px;
+      color: #496B83;
+      font-weight: 400;
+    }
+
+    textarea{
+      width: 97%;
+      height: 100px;
+      resize: none;
+      font-size: 12pt;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    
+`;

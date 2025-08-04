@@ -1,57 +1,19 @@
-import { useContext, useEffect, useState, useRef } from 'react'
+// import { useContext, useState } from 'react'
 import { Container, List } from "./styles"
-import Search from '../../components/Search';
-import ButtonSend from '../../components/ButtonSend';
-import LineInfo from '../../components/LineInfo';
-import { AuthContext } from '../../context/context';
-import { gerarPDF } from "./func/gerarPDF"
-import { getPeriodoInicioDoMes } from "./func/periodo"
+// import { AuthContext } from '../../context/context';
+import logo from "../../../public/logo.svg"
+import { version } from "../../../package.json";
 
-export default function Inicio({ setIsForm }) {
-  const { listCheckout, listCheck, setListCheck } = useContext(AuthContext);
-  const [] = useState([]);
-  const [search, setSearch] = useState("");
-  const [periodo, setPeriodo] = useState(getPeriodoInicioDoMes());
-
-  useEffect(() => {
-    const run = async () => {
-      const res = await listCheckout();
-      setListCheck(res.data);
-    };
-    run();
-  }, []);
-
-  const filtrados = listCheck.filter(v => {
-    const inicio = new Date(`${periodo.start}T00:00:00`);
-    const fim = new Date(`${periodo.end}T23:59:59`);
-    const dataItem = new Date(v.dataHora); // deve estar em formato ISO
-
-    return (
-      dataItem >= inicio &&
-      dataItem <= fim &&
-      v.veiculo?.toLowerCase().includes(search.toLowerCase())
-    );
-  });
+export default function Inicio() {
+  // const { user } = useContext(AuthContext);
 
   return (
     <Container>
-      <Search
-        search={search}
-        setSearch={e => setSearch(e.target.value)}
-        gerarPDF={gerarPDF}
-        listCheck={filtrados}
-        periodo={periodo}
-        setPeriodo={setPeriodo}
-      />
       <List>
-        {filtrados.map((v, i) =>
-          <LineInfo
-            key={i}
-            data={v}
-          />
-        )}
+        <img src={logo} alt="EyeCheck" />
+        <p>Sistema de Inspeção e Controle Veicular</p>
+        <p style={{ fontSize: 12 }}>{version}</p>
       </List>
-      <ButtonSend onClick={() => setIsForm(true)} />
     </Container>
   );
 }

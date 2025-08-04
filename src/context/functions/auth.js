@@ -11,9 +11,12 @@ export const login = async (val, setAuth, setLoading) => {
     setLoading(true);
     try {
         const response = await api.post('/auth', val);
-        const { message, id, user } = response.data
-        localStorage.setItem("auth", JSON.stringify({ id, user, exp }));
-        setAuth({ id, user })
+        const { id, user, liberadoArr, tipo } = response.data
+        // console.log(response.data)
+        localStorage.setItem("auth", JSON.stringify({
+            id, user, liberadoArr, tipo, exp
+        }));
+        setAuth({ id, user, liberadoArr, tipo })
         // console.log(message);
         setLoading(false)
     } catch (err) {

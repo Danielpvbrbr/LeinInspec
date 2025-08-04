@@ -212,10 +212,10 @@ export default function Manutencao() {
                   disabled
                 />
 
-                <BsXLg
+                {/* <BsXLg
                   color='#ff1504'
                   onClick={() => handleRemove(i)}
-                />
+                /> */}
               </span>
             </Line>
           )}
@@ -226,13 +226,13 @@ export default function Manutencao() {
             onClick={handleSubmit}
             style={{ background: "#39913d" }}
           >{id ? "Atualizar" : "Salvar"}</button>
-          {id &&
+          {/* {id &&
             <button
               type='button'
               onClick={() => removerItem({ name: name, id: id })}
               style={{ background: "#ca5858" }}
             >Excluir</button>
-          }
+          } */}
           {
             <button
               type='button'

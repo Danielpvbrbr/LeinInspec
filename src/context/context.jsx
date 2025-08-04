@@ -55,6 +55,12 @@ import {
     listCheckout as listCheckoutFunction,
 } from "./functions/checkout";
 
+import {
+    sendDefeito as sendDefeitoFunction,
+    listDefeito as listDefeitoFunction,
+    atualizarDefeito as atualizarDefeitoFunction,
+    deleteDefeito as deleteDefeitoFunction
+} from "./functions/notificarDefeito";
 export const AuthContext = createContext({});
 
 export default function AuthProvider({ children }) {
@@ -63,7 +69,7 @@ export default function AuthProvider({ children }) {
     const [listCheck, setListCheck] = useState([]);
     const [listGrupoArr, setListGrupoArr] = useState([])
 
-    const login = (val) => loginFunction(val, setAuth,setLoading);
+    const login = (val) => loginFunction(val, setAuth, setLoading);
     const logout = () => logoutFunction(setAuth);
 
     const sendUsuarios = (val) => sendUsuariosFunction(val,);
@@ -98,6 +104,11 @@ export default function AuthProvider({ children }) {
 
     const sendCheckout = (val) => sendCheckoutFunction(val);
     const listCheckout = () => listCheckoutFunction();
+
+    const sendDefeito = (val) => sendDefeitoFunction(val);
+    const listDefeito = () => listDefeitoFunction();
+    const atualizarDefeito = (val) => atualizarDefeitoFunction(val);
+    const deleteDefeito = (val) => deleteDefeitoFunction(val);
 
     useEffect(() => {
         const token = localStorage.getItem("auth");
@@ -149,7 +160,11 @@ export default function AuthProvider({ children }) {
                 sendOficina,
                 deleteOficina,
                 atualizarOficina,
-                listOficina
+                listOficina,
+                sendDefeito,
+                listDefeito,
+                atualizarDefeito,
+                deleteDefeito
             }}
         >
             {children}

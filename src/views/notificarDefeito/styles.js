@@ -24,10 +24,6 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
-  fieldset{
-    border-radius: 5px;
-  }
-
   fieldset section h4{
     margin-left: 10px;
   }
@@ -36,50 +32,37 @@ export const Container = styled.div`
     cursor: pointer;
   }
 `;
-export const AcessoArea = styled.fieldset`
-    min-height: 50px;
-    margin-top: 10px;
-    overflow-y: auto;
-    border: 1px solid #ffff;
-    border-radius: 5px;
 
-    section{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      width: 99.1%;
-      height: 30px;
-      background-color: #fff;
-      border-radius: 5px;
-      color: #46545E;
-    }
-    input{
-      width: 25px;
-    }
-`;
+
 
 export const List = styled.fieldset`
-    height: 420px;
-    margin-top: 10px;
+    height: 520px;
     overflow-y: auto;
-    border-radius: 5px;
-    /* ::-webkit-scrollbar{
+
+    ::-webkit-scrollbar{
       display: none;
-    } */
+    } 
 
     section{
       width: 100%;
-      height: 50px;
+      /* height: 50px; */
       display: flex;
       align-items: center;
+      flex-direction: column;
       font-size: 12pt;
       border-radius: 5px;
-      background-color: #46545E;
+      background-color: ${p => p.bk};
       color: #fff;
       justify-content: space-between;
-      margin-bottom: 3px;
       cursor: pointer;
-  }
+      margin: 5px 0px;
+    }
 
+  section span{
+    width: 98%;
+    margin: 2px 0px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+  }
 `;

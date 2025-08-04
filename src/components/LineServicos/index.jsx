@@ -40,11 +40,11 @@ export default function LineServicos({ key, data, onClick, run }) {
             size={20}
             onClick={onClick}
           />
-          <BsXLg
+          {/* <BsXLg
             color='#ff0000'
             size={24}
             onClick={() => removerItem({ name: data.descricao, id: data.id })}
-          />
+          /> */}
         </h5>
       </section>
 

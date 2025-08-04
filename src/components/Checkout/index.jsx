@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { Container, Area, Header, InfoOption, List, Line, LineText, Action } from "./styles"
+import { Container, Area, Header, InfoOption, List, Line, LineText, Action, InputKM } from "./styles"
 import { AuthContext } from '../../context/context'
 import SelectVeiculo from '../SelectVeiculo'
 import SelectMotorista from '../SelectMotorista'
@@ -15,6 +15,7 @@ export default function Checkout({ isForm, setIsForm }) {
   const [condutor, setCondutor] = useState("")
   const [veiculo, setVeiculo] = useState("")
   const [placa, setPlaca] = useState("")
+  const [km, setKm] = useState("")
   const [observacao, setObservacao] = useState("")
   const [listCheckout, setListCheckout] = useState([])
 
@@ -28,7 +29,8 @@ export default function Checkout({ isForm, setIsForm }) {
         usuario: user.user,
         observacao: observacao,
         listCheckout: JSON.stringify(listCheckout),
-        dataHora: formatDate()
+        dataHora: formatDate(),
+        km: km
       })
 
       if (res) {
@@ -77,6 +79,14 @@ export default function Checkout({ isForm, setIsForm }) {
             setVeiculo={setVeiculo}
             setPlaca={setPlaca}
           />
+          <p>KM Atual</p>
+          <InputKM
+            type='number'
+            value={km}
+            maxLength={10}
+            placeholder='Informe KM'
+            pattern="[0-9]*"
+            onChange={e => setKm(e.target.value)} />
         </InfoOption>
         <List>
           {listGroup.map((v, i) => {

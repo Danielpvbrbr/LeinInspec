@@ -22,7 +22,7 @@ export default function Login() {
   return (
     <Container>
       <Area>
-        <h4><span>Lein</span>Inspec</h4>
+        <h4><span>Eye</span>Check</h4>
         <span>
           <p>Usuário</p>
           <input

@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useRef } from 'react'
 import { Container, AreaForm, ContainerForm, Form, List, AreaPhoto, AreaInput } from "./styles"
-import { BsXLg } from "react-icons/bs";
+// import { BsXLg } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 import InputUniversal from '../../components/InputUniversal';
 
@@ -54,15 +54,15 @@ export default function Veículos() {
     setList(res.data);
   }
 
-  function removerItem({ name, id }) {
-    if (window.confirm(`Deseja realmente excluir ${name}?`)) {
-      deleteVeiculo({ id: id })
-      setName({ id: "", name: "" })
-      setPlaca("")
-      setImgB64("")
-      limparCampo()
-    }
-  }
+  // function removerItem({ name, id }) {
+  //   if (window.confirm(`Deseja realmente excluir ${name}?`)) {
+  //     deleteVeiculo({ id: id })
+  //     setName({ id: "", name: "" })
+  //     setPlaca("")
+  //     setImgB64("")
+  //     limparCampo()
+  //   }
+  // }
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -135,13 +135,13 @@ export default function Veículos() {
             onClick={handleSubmit}
             style={{ background: "#39913d" }}
           >{name.id ? "Atualizar" : "Salvar"}</button>
-          {name.id &&
+          {/* {name.id &&
             <button
               type='button'
               onClick={() => removerItem({ name: name.name, id: name.id })}
               style={{ background: "#ca5858" }}
             >Excluir</button>
-          }
+          } */}
           {
             <button
               type='button'
@@ -164,13 +164,13 @@ export default function Veículos() {
             style={{ background: v.id === name.id ? "#39913d" : "#46545E" }}
           >
             <h4>{v.descricao}</h4>
-            <BsXLg
+            {/* <BsXLg
               color='#ffffff'
               onClick={(e) => {
                 e.stopPropagation();
                 removerItem({ name: v.descricao, id: v.id });
               }}
-            />
+            /> */}
           </section>
         )}
 

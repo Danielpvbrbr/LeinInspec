@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 import { Container, Header, List, ButtonList } from "./styles"
-import { getPeriodoInicioDoMes } from "../../func/periodo"
+import { getPeriodoInicioDoMes } from "../../inicio/func/periodo"
+
 import { AuthContext } from '../../../context/context';
 import LineServicos from '../../../components/LineServicos';
 import PeriodoBuscar from '../../../components/PeriodoBuscar';
 
-export default function ListDados({ isList, setIsList, getValues }) {
-  const { listManutencao, } = useContext(AuthContext)
+export default function ListDados({ setIsList, getValues }) {
+  const { listDefeito, } = useContext(AuthContext)
   const [list, setList] = useState([])
   const [search, setSearch] = useState("");
   const [periodo, setPeriodo] = useState(getPeriodoInicioDoMes());
@@ -14,7 +15,7 @@ export default function ListDados({ isList, setIsList, getValues }) {
   useEffect(() => { run() }, [])
 
   async function run() {
-    const res = await listManutencao();
+    const res = await listDefeito();
     setList(res.data);
   }
 

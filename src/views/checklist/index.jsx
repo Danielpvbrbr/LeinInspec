@@ -70,13 +70,13 @@ export default function Checklist() {
             onClick={handleSubmit}
             style={{ background: "#39913d" }}
           >{name.id ? "Atualizar" : "Salvar"}</button>
-          {name.id &&
+          {/* {name.id &&
             <button
               type='button'
               onClick={() => removerItem({ name: name.name, id: name.id })}
               style={{ background: "#ca5858" }}
             >Excluir</button>
-          }
+          } */}
           {
             <button
               type='button'
@@ -96,7 +96,7 @@ export default function Checklist() {
             style={{ background: v.id == name.id ? "#39913d" : "#46545E" }}
           >
             <h4>{v.descricao}</h4>
-            <BsXLg color='#ffffff' onClick={() => removerItem({ name: v.descricao, id: v.id })} />
+            {/* <BsXLg color='#ffffff' onClick={() => removerItem({ name: v.descricao, id: v.id })} /> */}
           </section>
         )}
       </List>

@@ -70,13 +70,13 @@ export default function Motoristas() {
             onClick={handleSubmit}
             style={{ background: "#39913d" }}
           >{name.id ? "Atualizar" : "Salvar"}</button>
-          {name.id &&
+          {/* {name.id &&
             <button
               type='button'
               onClick={() => removerItem({ name: name.name, id: name.id })}
               style={{ background: "#ca5858" }}
             >Excluir</button>
-          }
+          } */}
           {
             <button
               type='button'

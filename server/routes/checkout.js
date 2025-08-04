@@ -17,12 +17,12 @@ exports.checkout_listar = async (req, res) => {
 };
 
 exports.checkout_register = async (req, res) => {
-    const { condutor, placa, veiculo, observacao, listCheckout, usuario, dataHora } = req.body;
+    const { km, condutor, placa, veiculo, observacao, listCheckout, usuario, dataHora } = req.body;
 
     try {
         const [result] = await db.query(
-            'INSERT INTO checkout (condutor, placa, veiculo, observacao, listCheckout, usuario, dataHora) VALUES (?,?,?,?,?,?,?)',
-            [condutor, placa, veiculo, observacao, listCheckout, usuario, dataHora]
+            'INSERT INTO checkout (km, condutor, placa, veiculo, observacao, listCheckout, usuario, dataHora) VALUES (?,?,?,?,?,?,?,?)',
+            [km, condutor, placa, veiculo, observacao, listCheckout, usuario, dataHora]
         );
 
         res.status(201).json({ message: 'Checkout realizado com sucesso', id: result.insertId });

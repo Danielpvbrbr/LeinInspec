@@ -16,7 +16,8 @@ const { defeito_listar, defeito_register, defeito_delete, defeito_atualizar } = 
 app.use(cors())
 app.use(express.json());
 
-const distPath = path.join(__dirname, 'dist'); //Modo Deploy
+const distPath = path.join(__dirname, '..', 'dist'); 
+//const distPath = path.join(__dirname, 'dist'); 
 app.use(express.static(distPath)); //Modo Deploy
 
 app.post('/auth', auth);

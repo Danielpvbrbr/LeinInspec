@@ -7,11 +7,23 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
   const { user, logout } = useContext(AuthContext)
   const [isMn, setIsMn] = useState(0)
 
+
+  const isVisible = (rota) => {
+    const liberado = JSON.parse(user.liberadoArr)
+
+    if ((user.tipo == 0)) {
+      return liberado.includes(rota)
+    }
+
+    return true
+  }
+
+
   return (
     <Container isMenu={isMenu ? "flex" : "none"}>
       <Area>
         <Header>
-          <h4><span>Lein</span>Inspec</h4>
+          <h4><span>Eye</span>Check</h4>
           <BsChevronDoubleLeft
             color='#fff'
             size={25}
@@ -25,36 +37,85 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
               <h4>Inicio</h4>
             </span>
           </Line>
-          <Line>
-            <span onClick={() => { setIsMn(isMn == 1 ? 0 : 1) }}>
-              <h4>Cadastro</h4>
-              {isMn == 1 ?
-                <BsChevronCompactDown color='#496B83' />
-                :
-                <BsChevronCompactRight color='#496B83' />
+          {isVisible(2) || isVisible(3) || isVisible(4) || isVisible(5) &&
+            < Line >
+              <span onClick={() => { setIsMn(isMn == 1 ? 0 : 1) }}>
+                <h4>Cadastro</h4>
+                {isMn == 1 ?
+                  <BsChevronCompactDown color='#496B83' />
+                  :
+                  <BsChevronCompactRight color='#496B83' />
+                }
+              </span>
+              {isMn == 1 &&
+                <>
+                  {isVisible(2) &&
+                    <p onClick={() => { setMenuSelect(1), setisMenu(false) }}>Motoristas</p>
+                  }
+                  {isVisible(3) &&
+                    <p onClick={() => { setMenuSelect(2, setisMenu(false)) }}>Veiculos</p>
+                  }
+                  {isVisible(4) &&
+                    <p onClick={() => { setMenuSelect(3), setisMenu(false) }}>Grupo de Checklist</p>
+                  }
+                  {isVisible(5) &&
+                    <p onClick={() => { setMenuSelect(4, setisMenu(false)) }}>Oficinas</p>
+                  }
+                </>
               }
-            </span>
-            {isMn == 1 &&
-              <>
-                <p onClick={() => { setMenuSelect(1), setisMenu(false) }}>Motoristas</p>
-                <p onClick={() => { setMenuSelect(2, setisMenu(false)) }}>Veiculos</p>
-                <p onClick={() => { setMenuSelect(3), setisMenu(false) }}>Grupo de Checklist</p>
-                <p onClick={() => { setMenuSelect(4, setisMenu(false)) }}>Oficinas</p>
-              </>
-            }
-          </Line>
+            </Line>
+          }
 
-          <Line>
-            <span onClick={() => { setMenuSelect(5), setisMenu(false) }}>
-              <h4>Usuário</h4>
-            </span>
-          </Line>
-
-          <Line>
-            <span onClick={() => { setMenuSelect(6), setisMenu(false) }}>
-              <h4>Manutenção</h4>
-            </span>
-          </Line>
+          {isVisible(6) &&
+            <Line>
+              <span onClick={() => { setMenuSelect(5), setisMenu(false) }}>
+                <h4>Usuário</h4>
+              </span>
+            </Line>
+          }
+          {isVisible(7) &&
+            <Line>
+              <span onClick={() => { setMenuSelect(6), setisMenu(false) }}>
+                <h4>Manutenção</h4>
+              </span>
+            </Line>
+          }
+          {isVisible(8) &&
+            <Line>
+              <span onClick={() => { setMenuSelect(7), setisMenu(false) }}>
+                <h4>Notificar Defeito</h4>
+              </span>
+            </Line>
+          }
+          {isVisible(9) &&
+            <Line>
+              <span onClick={() => { setMenuSelect(8), setisMenu(false) }}>
+                <h4>Checar Veiculo</h4>
+              </span>
+            </Line>
+          }
+          {isVisible(10) &&
+            <Line>
+              <span onClick={() => { setMenuSelect(9), setisMenu(false) }}>
+                <h4>Notificação</h4>
+                <p style={{
+                  width: "18px",
+                  height: "18px",
+                  display: "flex",
+                  padding: 2,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "50%",
+                  backgroundColor: "#52c505",
+                  fontSize: "9pt",
+                  fontWeight: 20,
+                  color: "#fff",
+                  marginRight: "10px",
+                  border: "none"
+                }}>0</p>
+              </span>
+            </Line>
+          }
         </ListLine>
         <section>
           <p
@@ -69,11 +130,11 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
         <Line>
           <span onClick={() => { logout(), setisMenu(false) }}>
             <h4>Trocar Usúario</h4>
-            <strong style={{ fontSize: 10, marginRight: 3,color:"#5f5c5c" }}>{version}</strong>
+            <strong style={{ fontSize: 10, marginRight: 3, color: "#5f5c5c" }}>{version}</strong>
           </span>
         </Line>
       </Area>
-    </Container>
+    </Container >
   )
 }
 

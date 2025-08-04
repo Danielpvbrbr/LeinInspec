@@ -147,3 +147,13 @@ export const Action = styled.div`
     }
 
 `;
+
+export const InputKM = styled.input`
+  width: 100px;
+  height: 35px;
+  border: 1px solid #496B83;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 3px;
+
+`;

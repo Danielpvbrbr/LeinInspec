@@ -57,7 +57,7 @@ export const Line = styled.section`
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
     
     span{
       min-height: 40px;

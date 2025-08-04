@@ -1,4 +1,15 @@
-import { styled } from 'styled-components';
+import { styled, keyframes } from 'styled-components';
+
+const msg = keyframes`
+  from{
+    opacity: 0;
+  
+  }
+  to{
+    opacity: 1;
+    color: #77F377;
+  }
+`;
 
 export const Container = styled.div`
   width: 600px;
@@ -21,13 +32,34 @@ export const Container = styled.div`
   div{
     width:63%;
   }
- span{
+
+  span{
       color: #77F377;
-    }
+  }
 
   h4{
       font-size: 25pt;
       color: #fff;
       margin-top: -10px;
   }
+  .msg{
+    animation: ${msg} 2s linear infinite;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+p{
+ width: 18px;
+ height: 18px;
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size: 9pt;
+  position: relative;
+  /* animation: ${msg} 2s linear infinite; */
+  right: 8px;
+  bottom: 6px;
+}
 `;

@@ -3,29 +3,27 @@ import { styled } from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: 94vh;
-  background-color: #46545E;
+  background-color: #D9D9D9;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 `;
 
 export const List = styled.div`
   width: 100%;
+  height: 100%;
+  background-color: #D9D9D9;
   flex-direction: column;
   display: flex;
   align-items: center;
-  gap: 2px;
- 
-  img{
-    width: 200px;
-    
+  overflow-y: auto;
+  gap: 4px;
+
+ &::-webkit-scrollbar {
+    display: none;
   }
 
-  p{
-    font-size: 15pt;
-    font-style: italic;
-    font-weight: 500;
-    opacity: 0.4;
-    color: #fff;
-  }
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+
 `;

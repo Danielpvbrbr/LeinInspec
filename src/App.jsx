@@ -9,12 +9,13 @@ import Checklist from './views/checklist';
 import Usuarios from './views/usuarios';
 import Manutencao from './views/manutencao';
 import Oficina from './views/oficina';
-
+import NotificarDefeito from './views/notificarDefeito';
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+import Verificar from './views/verificar';
+import Notificacao from './views/notificacao';
 
 import { AuthContext } from './context/context';
-
 
 export default function App() {
   const { isAuthenticated } = useContext(AuthContext)
@@ -38,6 +39,12 @@ export default function App() {
         return <Usuarios />
       case 6:
         return <Manutencao />
+      case 7:
+        return <NotificarDefeito />
+      case 8:
+        return <Verificar setIsForm={setIsForm} />
+      case 9:
+        return <Notificacao />
     }
   }
 
@@ -65,7 +72,6 @@ export default function App() {
         :
         <Login />
       }
-
     </Container >
   )
 }

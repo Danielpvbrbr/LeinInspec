@@ -68,6 +68,7 @@ export default function AuthProvider({ children }) {
     const [loading, setLoading] = useState(false);
     const [listCheck, setListCheck] = useState([]);
     const [listGrupoArr, setListGrupoArr] = useState([])
+    const [notificacao, setNotificacao] = useState([]);
 
     const login = (val) => loginFunction(val, setAuth, setLoading);
     const logout = () => logoutFunction(setAuth);
@@ -120,8 +121,23 @@ export default function AuthProvider({ children }) {
                 logout(); // Aqui é logout, não deslogar
             }
         }
+        getlistDefeito()
     }, []);
 
+    async function getlistDefeito() {
+        const res = await listDefeito();
+        setNotificacao(res.data || []);
+    }
+
+    const isVisible = (rota) => {
+        const liberado = JSON.parse(auth.liberadoArr)
+
+        if (auth.tipo === 0) {
+            return liberado.includes(rota)
+        }
+
+        return true
+    }
 
     return (
         <AuthContext.Provider
@@ -164,7 +180,10 @@ export default function AuthProvider({ children }) {
                 sendDefeito,
                 listDefeito,
                 atualizarDefeito,
-                deleteDefeito
+                deleteDefeito,
+                notificacao,
+                isVisible,
+                getlistDefeito
             }}
         >
             {children}

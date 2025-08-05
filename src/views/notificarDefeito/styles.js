@@ -34,9 +34,8 @@ export const Container = styled.div`
 `;
 
 
-
 export const List = styled.fieldset`
-    height: 520px;
+    height: 90%;
     overflow-y: auto;
 
     ::-webkit-scrollbar{

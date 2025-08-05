@@ -62,4 +62,29 @@ p{
   right: 8px;
   bottom: 6px;
 }
+.notification {
+  width: 50px;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+  /* border: 1px solid red; */
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size: 9pt;
+  color: #fc4049ff;
+  font-weight: bold;
+  border: 1px solid #46545E;
+}
+
 `;

@@ -136,14 +136,17 @@ export default function notificarDefeito() {
           }
         </span>
       </fieldset>
-      <List >
+      <List>
         <legend>Lista de Motoristas</legend>
-        {list.map((v, i) =>
+
+        <h3 style={{ color: "#ff8800", margin: "10px 0" }}>Pendentes</h3>
+        {list.filter(v => !Boolean(v.status)).map((v, i) => (
           <section
-            key={i}
+            key={`pendente-${i}`}
             onClick={() => getValues(v)}
             style={{
               background: v.id == name.id ? "#39913d" : "#46545E",
+              marginBottom: 8,
             }}
           >
             <span>
@@ -167,10 +170,54 @@ export default function notificarDefeito() {
               <p>Data</p>
               <p style={{ fontSize: 13 }}>{dateFormat(v.dataCreate)}</p>
             </span>
-            {/* <BsXLg color='#ffffff' onClick={() => removerItem({ name: v.descricao, id: v.id })} /> */}
+
+            <span>
+              <p>Status</p>
+              <p style={{ fontSize: 13, color: "#ff8800" }}>Pendente</p>
+            </span>
           </section>
-        )}
+        ))}
+
+        <h3 style={{ color: "#3bbb41", margin: "20px 0 10px" }}>Resolvidos</h3>
+        {list.filter(v => Boolean(v.status)).map((v, i) => (
+          <section
+            key={`resolvido-${i}`}
+            onClick={() => getValues(v)}
+            style={{
+              background: v.id == name.id ? "#11ec1c" : "#46545E",
+              marginBottom: 8,
+            }}
+          >
+            <span>
+              <p>Responsável</p>
+              <p style={{ fontSize: 13 }}>{v.responsavel}</p>
+            </span>
+
+            <span>
+              <p>Veículo</p>
+              <p style={{ fontSize: 13 }}>{v.veiculo}</p>
+            </span>
+
+            <span>
+              <p>Defeito</p>
+              <p style={{ fontSize: 13 }}>
+                {(v.descricao ?? "").toString().slice(0, 80)}
+              </p>
+            </span>
+
+            <span>
+              <p>Data</p>
+              <p style={{ fontSize: 13 }}>{dateFormat(v.dataCreate)}</p>
+            </span>
+
+            <span>
+              <p>Status</p>
+              <p style={{ fontSize: 13, color: "#11ec1c" }}>Resolvido</p>
+            </span>
+          </section>
+        ))}
       </List>
+
     </Container>
   )
 }

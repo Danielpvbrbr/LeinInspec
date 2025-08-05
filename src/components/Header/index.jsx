@@ -1,9 +1,11 @@
-import { useState } from 'react'
-import { Container } from "./styles"
-import { BsList } from "react-icons/bs";
-import { BsFillEnvelopeFill } from "react-icons/bs";
+import { useState, useEffect, useContext } from 'react';
+import { Container } from "./styles";
+import { BsList, BsFillEnvelopeFill } from "react-icons/bs";
+import { AuthContext } from '../../context/context';
 
 export default function Header({ onClick }) {
+  const { notificacao, isVisible } = useContext(AuthContext);
+  const notificacoesPendentes = notificacao.filter(item => item.status === 0);
 
   return (
     <Container>
@@ -18,9 +20,15 @@ export default function Header({ onClick }) {
       <div>
         <h4><span>Eye</span>Check</h4>
       </div>
-     {/* <BsFillEnvelopeFill size={30} color='#fff' className='msg' /> */}
-      {/* <p>2</p> */}
-    </Container>
-  ) 
-}
+      {isVisible(10) &&
+        <div className="notification">
+          <BsFillEnvelopeFill size={30} color='#fff' className='msg' />
+          {notificacoesPendentes.length > 0 && (
+            <span className="badge">{notificacoesPendentes.length}</span>
+          )}
+        </div>
+      }
 
+    </Container>
+  );
+}

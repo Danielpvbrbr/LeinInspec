@@ -5,18 +5,19 @@ import { AuthContext } from '../../context/context';
 import { version } from '../../../package.json'
 
 export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
-  const { user, logout } = useContext(AuthContext)
+  const { user, logout, notificacao, isVisible } = useContext(AuthContext)
   const [isMn, setIsMn] = useState(0)
+  const notificacoesPendentes = notificacao.filter(item => item.status === 0);
 
-  const isVisible = (rota) => {
-    const liberado = JSON.parse(user.liberadoArr)
+  // const isVisible = (rota) => {
+  //   const liberado = JSON.parse(user.liberadoArr)
 
-    if (user.tipo === 0) {
-      return liberado.includes(rota)
-    }
+  //   if (user.tipo === 0) {
+  //     return liberado.includes(rota)
+  //   }
 
-    return true
-  }
+  //   return true
+  // }
 
   const showCadastro = [2, 3, 4, 5].some(isVisible)
 
@@ -24,7 +25,14 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
     <Container isMenu={isMenu ? "flex" : "none"}>
       <Area>
         <Header>
-          <h4><span>Eye</span>Check</h4>
+          <p style={{
+            fontSize: 17,
+            textAlign: "center",
+            color: "#fff",
+            marginBottom: 2
+          }}>
+            {user?.user}
+          </p>
           <BsChevronDoubleLeft
             color='#fff'
             size={25}
@@ -102,8 +110,8 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
           }
 
           {isVisible(10) &&
-            <Line>
-              <span onClick={() => { setMenuSelect(9); setisMenu(false) }}>
+            <Line >
+              <span className={notificacoesPendentes.length > 0 && 'notfy'} onClick={() => { setMenuSelect(9); setisMenu(false) }}>
                 <h4>Notificação</h4>
                 <p style={{
                   width: "18px",
@@ -113,19 +121,19 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: "50%",
-                  backgroundColor: "#52c505",
+                  backgroundColor: "#c52b05",
                   fontSize: "9pt",
                   fontWeight: 20,
                   color: "#fff",
                   marginRight: "10px",
                   border: "none"
-                }}>0</p>
+                }}>{notificacoesPendentes.length}</p>
               </span>
             </Line>
           }
         </ListLine>
 
-        <section>
+        {/* <section>
           <p style={{
             fontSize: 17,
             textAlign: "center",
@@ -134,7 +142,7 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
           }}>
             {user?.user}
           </p>
-        </section>
+        </section> */}
 
         <Line>
           <span onClick={() => { logout(); setisMenu(false) }}>
@@ -145,6 +153,6 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
           </span>
         </Line>
       </Area>
-    </Container>
+    </Container >
   )
 }

@@ -1,30 +1,66 @@
-import { useContext, useEffect, useState } from 'react'
-import { Container, List } from "./styles"
-import LineInfo from '../../components/LineInfo';
+import { useContext, useEffect, useState } from 'react';
+import { Container, List, LineNot } from './styles';
 import { AuthContext } from '../../context/context';
 
+function formatDate(data) {
+  const d = new Date(data);
+  return d.toLocaleDateString("pt-BR");
+}
+
+
 export default function Notificacao() {
-  const { setListCheck } = useContext(AuthContext);
+  const { getlistDefeito, atualizarDefeito, notificacao } = useContext(AuthContext);
 
   useEffect(() => {
-    const run = async () => {
-      // const res = await listCheckout();
-      // setListCheck(res.data);
-    };
-    run();
+    getlistDefeito()
   }, []);
+
+
+  async function submit(v) {
+
+    if (v.id) {
+      const res = await atualizarDefeito({
+        status: 1,
+        id: v.id
+      })
+
+      if (res) {
+        getlistDefeito()
+      }
+    }
+
+  }
 
   return (
     <Container>
       <List>
-        {/* {filtrados.map((v, i) =>
-          <LineInfo
-            key={i}
-            data={v}
-          />
-        )} */}
+        {notificacao.map((v, i) => (
+          !Boolean(v.status) &&
+          <LineNot key={i}>
+            <p style={{ fontSize: 16, lineHeight: '1.5', wordBreak: 'break-word' }}>
+              <strong>{v.responsavel}</strong> informou que o veículo <strong>{v.veiculo}</strong> (placa <strong>{v.placa}</strong>) está com o seguinte defeito:
+              <br />
+              <span style={{ display: 'block', marginTop: 5 }}>{v.descricao}</span>
+            </p>
+            <p style={{ fontSize: 11, marginTop: 5 }}>{formatDate(v.dataCreate)}</p>
+            <button
+              style={{
+                marginTop: 8,
+                padding: '6px 12px',
+                fontSize: 12,
+                background: '#77F377',
+                border: 'none',
+                borderRadius: 4,
+                color: '#302e2edd',
+                cursor: 'pointer'
+              }}
+              onClick={() => submit(v)}
+            >
+              Marcar como resolvido
+            </button>
+          </LineNot>
+        ))}
       </List>
-      <button onClick={() => { }} />
     </Container>
   );
 }

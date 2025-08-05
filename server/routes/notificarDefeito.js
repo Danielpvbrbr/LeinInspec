@@ -64,21 +64,33 @@ exports.defeito_delete = async (req, res) => {
 };
 
 
+
 exports.defeito_atualizar = async (req, res) => {
-    const { descricao, veiculo, placa, responsavel, id } = req.body;
+    const { descricao, veiculo, placa, responsavel, status, id } = req.body;
 
     if (!id) {
         return res.status(400).json({ error: 'ID é obrigatório' });
     }
 
     try {
-        const [result] = await db.query(
-            `UPDATE defeito SET descricao=?, veiculo=?, placa=?, responsavel=? WHERE id=?`,
-            [descricao, veiculo, placa, responsavel, id]
-        );
+        if (status) {
+            const [result] = await db.query(
+                `UPDATE defeito SET status=? WHERE id=?`,
+                [status, id]
+            );
 
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Defeito não encontrado para atualizar' });
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ error: 'Errop ao para atualizar' });
+            }
+        } else {
+            const [result] = await db.query(
+                `UPDATE defeito SET descricao=?, veiculo=?, placa=?, responsavel=? WHERE id=?`,
+                [descricao, veiculo, placa, responsavel, id]
+            );
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ error: 'Defeito não encontrado para atualizar' });
+            }
         }
 
         return res.status(200).json({ message: 'Defeito atualizado com sucesso' });

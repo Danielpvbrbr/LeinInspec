@@ -1,4 +1,15 @@
-import { styled } from 'styled-components';
+import { styled, keyframes } from 'styled-components';
+const animation = keyframes`
+  10%{
+    background-color: #ffc508ff;
+  }
+  50%{
+    background-color: #ff9408ff;
+  }
+  100%{
+    background-color: #ffc508ff;
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -8,17 +19,19 @@ export const Container = styled.div`
   align-items: center;
   background-color: rgba(0,0,0,0.0);
   position: fixed;
+  transition: 2s;
 `;
 
 export const Area = styled.section`
     width: 230px;
     height: 100%;
     margin-left: -370px;
-    background-color: #46545E;
+    background-color:rgba(70, 84, 94, 0.8);
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: -2px;
+    border-right:1px solid #fff;
 
    @media only screen and (max-width: 600px) {
       width: 50%;
@@ -29,7 +42,7 @@ export const Area = styled.section`
 export const Header = styled.section`
     width: 97%;
     height: 47px;
-    background-color: #000;
+    background-color:rgba(0, 0, 0, 0);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,6 +62,10 @@ export const Header = styled.section`
 export const ListLine = styled.section`
     width: 100%;
     height: 100%;
+
+    .notfy{
+      animation: ${animation} 1s linear infinite;
+    }
 `;
 
 export const Line = styled.section`
@@ -87,4 +104,6 @@ export const Line = styled.section`
       align-items: center;
       cursor: pointer;
     }
+
+    
 `;

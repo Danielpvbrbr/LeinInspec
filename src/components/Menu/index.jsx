@@ -1,23 +1,24 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Container, Area, Header, ListLine, Line } from "./styles"
 import { BsChevronDoubleLeft, BsChevronCompactDown, BsChevronCompactRight } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 import { version } from '../../../package.json'
 
 export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
-  const { user, logout, notificacao, isVisible } = useContext(AuthContext)
+  const { user, logout, isVisible, getNotificacao } = useContext(AuthContext)
   const [isMn, setIsMn] = useState(0)
-  const notificacoesPendentes = notificacao.filter(item => item.status === 0);
+  const [notificacao, setNotificacao] = useState([]);
 
-  // const isVisible = (rota) => {
-  //   const liberado = JSON.parse(user.liberadoArr)
+  useEffect(() => {
+    const run = async () => {
+      const { res1, res2 } = await getNotificacao();
+      const r1 = res2?.filter(item => item.status === 0);
 
-  //   if (user.tipo === 0) {
-  //     return liberado.includes(rota)
-  //   }
+      setNotificacao(res1?.length + r1.length);
+    };
 
-  //   return true
-  // }
+    run();
+  }, []);
 
   const showCadastro = [2, 3, 4, 5].some(isVisible)
 
@@ -111,7 +112,7 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
 
           {isVisible(10) &&
             <Line >
-              <span className={notificacoesPendentes.length > 0 && 'notfy'} onClick={() => { setMenuSelect(9); setisMenu(false) }}>
+              <span className={notificacao > 0 && 'notfy'} onClick={() => { setMenuSelect(9); setisMenu(false) }}>
                 <h4>Notificação</h4>
                 <p style={{
                   width: "18px",
@@ -127,7 +128,7 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
                   color: "#fff",
                   marginRight: "10px",
                   border: "none"
-                }}>{notificacoesPendentes.length}</p>
+                }}>{notificacao}</p>
               </span>
             </Line>
           }

@@ -34,37 +34,46 @@ export const Container = styled.div`
 `;
 
 
+
 export const List = styled.fieldset`
-    height: 90%;
-    overflow-y: auto;
+  height: 90%;
+  overflow-y: auto;
 
-    ::-webkit-scrollbar{
-      display: none;
-    } 
+  ::-webkit-scrollbar {
+    display: none;
+  } 
 
-    section{
-      width: 100%;
-      /* height: 50px; */
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      font-size: 12pt;
-      border-radius: 5px;
-      background-color: ${p => p.bk};
-      color: #fff;
-      justify-content: space-between;
-      cursor: pointer;
-      margin: 5px 0px;
-    }
+  section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 12pt;
+    border-radius: 5px;
+    background-color: ${p => p.bk};
+    color: #fff;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 5px 0px;
+    padding: 8px;
+  }
 
-  section span{
+  section span {
     width: 98%;
+    word-wrap: break-word;
     margin: 2px 0px;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #ddd;
   }
+
+  section p {
+    width: 100%;
+    word-break: break-word;
+    white-space: pre-wrap; 
+  }
 `;
+
 export const LineText = styled.section`
     width: 100%;
     cursor: pointer;

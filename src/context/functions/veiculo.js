@@ -8,7 +8,7 @@ export const sendVeiculo = async (val) => {
         listVeiculo()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -22,7 +22,7 @@ export const deleteVeiculo = async (val) => {
         listVeiculo()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -35,7 +35,7 @@ export const atualizarVeiculo = async (val) => {
         listVeiculo()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -46,7 +46,7 @@ export const listVeiculo = async () => {
         //console.log(response.data);
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };

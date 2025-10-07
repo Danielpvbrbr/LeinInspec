@@ -14,6 +14,7 @@ import Checkout from './components/Checkout';
 import Login from './components/Login';
 import Verificar from './views/verificar';
 import Notificacao from './views/notificacao';
+import usePWAInstall from './components/usePWAInstall';
 
 import { AuthContext } from './context/context';
 
@@ -22,7 +23,8 @@ export default function App() {
   const [isMenu, setisMenu] = useState(false)
   const [isForm, setIsForm] = useState(false)
   const [menuSelect, setMenuSelect] = useState(0)
-
+ const { canInstall, installApp } = usePWAInstall();
+ 
   const active = () => {
     switch (menuSelect) {
       case 0:
@@ -49,7 +51,7 @@ export default function App() {
   }
 
   return (
-    <Container>
+    <Container bgAuth={isAuthenticated}>
       {isAuthenticated ?
         <>
           <Header
@@ -70,7 +72,22 @@ export default function App() {
           />
         </>
         :
-        <Login />
+        <>
+          <Login />
+          {canInstall && (
+            <button onClick={installApp} style={{
+              padding: "10px 20px",
+              borderRadius: "8px",
+              background: "#1976d2",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer"
+            }}>
+              Instalar App 📲
+            </button>
+          )}
+        </>
+
       }
     </Container >
   )
@@ -84,6 +101,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: ${(el) => el.bgAuth ? "#000000" : "#fff"};
   /* border: 1px solid red; */
 `;
 

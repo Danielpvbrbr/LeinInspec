@@ -24,7 +24,7 @@ export default function Verificar({ setIsForm }) {
   const filtrados = listCheck.filter(v => {
     const inicio = new Date(`${periodo.start}T00:00:00`);
     const fim = new Date(`${periodo.end}T23:59:59`);
-    const dataItem = new Date(v.dataHora); // deve estar em formato ISO
+    const dataItem = new Date(v.dataHora); //  estar em formato ISO
 
     return (
       dataItem >= inicio &&

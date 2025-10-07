@@ -8,7 +8,7 @@ exports.checkout_listar = async (req, res) => {
         if (rows.length === 0) {
             return res.status(201).json({ error: 'Dados não encontrado', data: [] });
         }
-        //console.log(rows)
+    
         res.json({ message: 'Success', data: rows });
     } catch (err) {
         console.error(err);

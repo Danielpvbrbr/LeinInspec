@@ -68,7 +68,6 @@ export default function AuthProvider({ children }) {
     const [loading, setLoading] = useState(false);
     const [listCheck, setListCheck] = useState([]);
     const [listGrupoArr, setListGrupoArr] = useState([])
-    const [notificacao, setNotificacao] = useState([]);
 
     const login = (val) => loginFunction(val, setAuth, setLoading);
     const logout = () => logoutFunction(setAuth);
@@ -116,17 +115,28 @@ export default function AuthProvider({ children }) {
         if (token) {
             const cookie = JSON.parse(token);
             setAuth(cookie);
+
             if (expirado(cookie.exp)) {
-                alert("Tempo expirado!");
+                // alert("Tempo expirado!");
                 logout(); // Aqui é logout, não deslogar
             }
         }
         getlistDefeito()
+        getNotificacao()
     }, []);
 
+    const getNotificacao = async () => {
+        try {
+            const res1 = await api.get("/notificacao");
+            const res2 = await listDefeito();
+            return { res1: res1?.data?.data, res2: res2?.data };
+        } catch (err) {
+            return { res1: [], res2: [] };
+        }
+    }
+
     async function getlistDefeito() {
-        const res = await listDefeito();
-        setNotificacao(res.data || []);
+
     }
 
     const isVisible = (rota) => {
@@ -181,9 +191,9 @@ export default function AuthProvider({ children }) {
                 listDefeito,
                 atualizarDefeito,
                 deleteDefeito,
-                notificacao,
                 isVisible,
-                getlistDefeito
+                getlistDefeito,
+                getNotificacao
             }}
         >
             {children}

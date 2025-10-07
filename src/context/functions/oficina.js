@@ -9,7 +9,7 @@ export const sendOficina = async (val) => {
         listOficina()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -22,7 +22,7 @@ export const deleteOficina = async (val) => {
         listOficina()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -36,7 +36,7 @@ export const atualizarOficina = async (val) => {
         listOficina()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -48,7 +48,7 @@ export const listOficina = async () => {
         //console.log(response.data);
         return response.data;
     } catch (err) {
-        console.log(err?.response)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };

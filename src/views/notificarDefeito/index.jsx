@@ -137,7 +137,7 @@ export default function notificarDefeito() {
         </span>
       </fieldset>
       <List>
-        <legend>Lista de Motoristas</legend>
+        <legend>Notificação de defeito</legend>
 
         <h3 style={{ color: "#ff8800", margin: "10px 0" }}>Pendentes</h3>
         {list.filter(v => !Boolean(v.status)).map((v, i) => (
@@ -175,6 +175,7 @@ export default function notificarDefeito() {
               <p>Status</p>
               <p style={{ fontSize: 13, color: "#ff8800" }}>Pendente</p>
             </span>
+
           </section>
         ))}
 
@@ -182,7 +183,6 @@ export default function notificarDefeito() {
         {list.filter(v => Boolean(v.status)).map((v, i) => (
           <section
             key={`resolvido-${i}`}
-            onClick={() => getValues(v)}
             style={{
               background: v.id == name.id ? "#11ec1c" : "#46545E",
               marginBottom: 8,
@@ -214,6 +214,8 @@ export default function notificarDefeito() {
               <p>Status</p>
               <p style={{ fontSize: 13, color: "#11ec1c" }}>Resolvido</p>
             </span>
+            <h2 style={{ fontSize: 13,margin:0 }}>Solução</h2>
+            <p style={{ fontSize: 13, color: "#11ec1c" }}>{v.solucao}</p>
           </section>
         ))}
       </List>

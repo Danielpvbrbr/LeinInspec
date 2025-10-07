@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-const PORT = process.env.PORT || 5157; //ser for modo cliente mudar para 9000
+const PORT = process.env.PORT || 9000; //ser for modo cliente mudar para 9000
 const { auth, register, usuarios_listar, usuarios_delete, usuarios_atualizar } = require('./routes/auth');
 const { listar, motor_register, motor_delete, motor_atualizar } = require('./routes/motorista');
 const { veiculo_listar, veiculo_register, veiculo_delete, veiculo_atualizar } = require('./routes/veiculos');
@@ -12,6 +12,7 @@ const { checkout_listar, checkout_register } = require('./routes/checkout');
 const { oficina_listar, oficina_register, oficina_delete, oficina_atualizar } = require('./routes/oficina');
 const { manute_listar, manute_register, manute_delete, manute_atualizar } = require('./routes/manutencao');
 const { defeito_listar, defeito_register, defeito_delete, defeito_atualizar } = require('./routes/notificarDefeito');
+const { senNotificacao } = require('./routes/notificacao');
 
 app.use(cors())
 app.use(express.json());
@@ -59,6 +60,7 @@ app.post("/defeito/register", defeito_register)
 app.post("/defeito/delete", defeito_delete)
 app.post("/defeito/atualizar", defeito_atualizar)
 
+app.get("/notificacao", senNotificacao);
 
 app.get('*', (req, res) => { //Modo deploy
     res.sendFile(path.join(distPath, 'index.html'));

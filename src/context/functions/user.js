@@ -8,7 +8,7 @@ export const sendUsuarios = async (val) => {
         listUsuarios()
         return response.data
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -19,7 +19,7 @@ export const listUsuarios = async () => {
         //console.log(response.data);
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -32,7 +32,7 @@ export const atualizarUsuarios = async (val) => {
         listUsuarios()
         return response.data
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -46,7 +46,7 @@ export const deleteUsuarios = async (val) => {
         listUsuarios()
         return response.data
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };

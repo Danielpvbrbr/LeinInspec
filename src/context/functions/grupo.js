@@ -8,7 +8,7 @@ export const sendGrupo = async (val) => {
         listGrupo()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -21,7 +21,7 @@ export const deleteGrupo = async (val) => {
         listGrupo()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -35,7 +35,7 @@ export const atualizarGrupo = async (val) => {
         listGrupo()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -47,8 +47,7 @@ export const listGrupo = async () => {
         //console.log(response.data);
         return response.data;
     } catch (err) {
-
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };

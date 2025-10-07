@@ -5,7 +5,6 @@ import logo from "../../../public/logo.svg"
 import { version } from "../../../package.json";
 
 export default function Inicio() {
-  // const { user } = useContext(AuthContext);
 
   return (
     <Container>

@@ -4,7 +4,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'adr@3412',
-  database: 'checklister',
+  database: 'checklister_dev',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,

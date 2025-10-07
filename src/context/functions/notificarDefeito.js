@@ -30,8 +30,10 @@ export const deleteDefeito = async (val) => {
     try {
         const response = await api.post('/defeito/delete', val);
         alert(response.data.message);
-        if (typeof listManutencao === 'function') {
+        try {
             listManutencao();
+        } catch (erroInterno) {
+            console.error("Erro ao executar listManutencao():", erroInterno);
         }
         return response.data;
     } catch (err) {
@@ -45,8 +47,10 @@ export const atualizarDefeito = async (val) => {
     try {
         const response = await api.post('/defeito/atualizar', val);
         alert(response.data.message);
-        if (typeof listManutencao === 'function') {
+        try {
             listManutencao();
+        } catch (erroInterno) {
+            console.error("Erro ao executar listManutencao():", erroInterno);
         }
         return response.data;
     } catch (err) {

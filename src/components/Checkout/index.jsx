@@ -15,13 +15,13 @@ export default function Checkout({ isForm, setIsForm }) {
   const [condutor, setCondutor] = useState("")
   const [veiculo, setVeiculo] = useState("")
   const [placa, setPlaca] = useState("")
-  const [km, setKm] = useState(0)
+  const [km, setKm] = useState("")
   const [observacao, setObservacao] = useState("")
   const [listCheckout, setListCheckout] = useState([])
 
   const handleSubmit = () => {
 
-    if (veiculo && veiculo) {
+    if (veiculo && veiculo && km) {
       const res = sendCheckout({
         condutor: condutor,
         veiculo: veiculo,
@@ -38,7 +38,7 @@ export default function Checkout({ isForm, setIsForm }) {
       }
 
     } else {
-      alert("Campo Veiculo e o Motorista e obrigatório")
+      alert("Campo Motorista e Veiculo e KM e obrigatório")
     }
 
   }
@@ -116,7 +116,6 @@ export default function Checkout({ isForm, setIsForm }) {
                   }}
                 />
               </Line>
-
             )
           })}
 

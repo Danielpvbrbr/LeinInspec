@@ -59,3 +59,39 @@ export const LineNot = styled.div`
   }
 `;
 
+export const Confirm = styled.div`
+  width: 455px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #4a60c2ff;
+  border-radius: 10px;
+  position: fixed;
+  bottom:50%;
+  gap: 5px;
+
+  svg{
+    position: relative;
+    right: -210px;
+
+  }
+
+  textarea{
+    width: 96%;
+    height: 70%;
+    font-size: 11pt;
+    border-radius: 10px;
+  }
+  button{
+    width: 96%;
+    height:40px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: #77F377;
+  }
+
+`;

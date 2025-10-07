@@ -17,8 +17,8 @@ export default function LineInfo({ data, key }) {
   }
 
   return (
-    <Container key={key} onClick={() => setIsMunu(!isMenu)}>
-      <span>
+    <Container key={key} onClick={() => setIsMunu(!isMenu)} >
+      <span style={{ minHeight: "28px" }}>
         <div>{data?.veiculo}</div>
         <div>{formatarDataBr(data?.dataHora)}</div>
       </span>
@@ -40,6 +40,10 @@ export default function LineInfo({ data, key }) {
           <Line>
             <p>Placa:</p>
             <p style={{ color: "#77F377" }}>{data?.placa}</p>
+          </Line>
+          <Line>
+            <p>KM:</p>
+            <p style={{ color: "#77F377" }}>{data?.km}</p>
           </Line>
           <Line>
             <p >Observações:</p>

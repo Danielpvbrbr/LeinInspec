@@ -1,40 +1,80 @@
 import { useContext, useEffect, useState } from 'react';
-import { Container, List, LineNot } from './styles';
+import { Container, List, LineNot, Confirm } from './styles';
 import { AuthContext } from '../../context/context';
+import { BsXCircleFill } from "react-icons/bs";
 
 function formatDate(data) {
   const d = new Date(data);
   return d.toLocaleDateString("pt-BR");
 }
 
-
 export default function Notificacao() {
-  const { getlistDefeito, atualizarDefeito, notificacao } = useContext(AuthContext);
+  const { getlistDefeito, atualizarDefeito, getNotificacao } = useContext(AuthContext);
+  const [notificacao, setNotificacao] = useState([]);
+  const [solucao, setSolucao] = useState("");
+  const [isConfirm, seIsConfirm] = useState(false);
 
   useEffect(() => {
-    getlistDefeito()
+    const run = async () => {
+      const res = await getNotificacao();
+      setNotificacao(res);
+    };
+
+    run();
   }, []);
 
-
   async function submit(v) {
+    seIsConfirm(v);
 
-    if (v.id) {
+    if (isConfirm && solucao.length <= 10) {
+      return alert("Favor preencher um número maior maior de caracteres!")
+    }
+
+
+    if (v.id && solucao.length >= 10) {
       const res = await atualizarDefeito({
         status: 1,
-        id: v.id
+        id: v.id,
+        solucao
       })
 
       if (res) {
-        getlistDefeito()
+        seIsConfirm(null);
+        setSolucao(null)
+        await getlistDefeito();
+        setNotificacao(await getNotificacao());
       }
     }
-
   }
+
+  const calDias = (data) => {
+    const hoje = new Date();
+    const dataInformada = new Date(data);
+
+    // diferença em milissegundos
+    const diffMs = hoje - dataInformada;
+
+    // converter ms para dias
+    const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    return ` ${diffDias} dias`;
+  };
 
   return (
     <Container>
       <List>
-        {notificacao.map((v, i) => (
+        {notificacao?.res1?.map((v, i) =>
+          <LineNot key={i} style={{ backgroundColor: "#e77111" }}>
+            <p style={{ fontSize: 16, lineHeight: '1.5', wordBreak: 'break-word' }}>
+              <strong>Checklist do veículo <strong style={{ color: "#4c00ff" }}>
+                {v?.veiculo}</strong> </strong> da placa <strong style={{ color: "#4c00ff" }}>
+                {v?.placa}</strong> está em atraso,<strong style={{ color: "#0044ff" }}>{calDias(v?.ultimaData)}</strong> ultima verificação foi em <strong style={{ color: "#4c00ff" }}>{formatDate(v?.ultimaData)}</strong>
+              <br />
+            </p>
+          </LineNot>
+        )}
+
+        {notificacao?.res2?.map((v, i) => (
           !Boolean(v.status) &&
           <LineNot key={i}>
             <p style={{ fontSize: 16, lineHeight: '1.5', wordBreak: 'break-word' }}>
@@ -61,6 +101,25 @@ export default function Notificacao() {
           </LineNot>
         ))}
       </List>
+      {isConfirm &&
+        <Confirm>
+          <BsXCircleFill
+            size={22}
+            color='#fff'
+            cursor="pointer"
+            onClick={() => seIsConfirm(null)}
+          />
+
+          <textarea
+            value={solucao}
+            onChange={e => setSolucao(e.target.value)}
+            maxLength={645}
+            placeholder="Descreva o que foi feito para solucionar."
+          />
+          <button onClick={() => submit(isConfirm)}>Finalizar</button>
+        </Confirm>
+      }
+
     </Container>
   );
 }

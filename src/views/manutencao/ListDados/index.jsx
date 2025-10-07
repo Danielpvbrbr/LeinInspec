@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Container, Header, List, ButtonList } from "./styles"
 import { getPeriodoInicioDoMes } from "../../func/periodo"
 import { AuthContext } from '../../../context/context';
-import LineServicos from '../../../components/LineServicos';
+import LineServicos from '../../../components/LineServicos/index_';
 import PeriodoBuscar from '../../../components/PeriodoBuscar';
 
 export default function ListDados({ isList, setIsList, getValues }) {
@@ -23,10 +23,17 @@ export default function ListDados({ isList, setIsList, getValues }) {
     const fim = new Date(`${periodo.end}T23:59:59`);
     const dataItem = new Date(v.dataCreate);
 
+    // Normaliza busca
+    const termo = search.toLowerCase();
+
     return (
       dataItem >= inicio &&
       dataItem <= fim &&
-      v.descricao?.toLowerCase().includes(search.toLowerCase())
+      (
+        v.descricao?.toLowerCase().includes(termo) ||
+        v.veiculo?.toLowerCase().includes(termo) ||
+        v.oficina?.toLowerCase().includes(termo)
+      )
     );
   });
 

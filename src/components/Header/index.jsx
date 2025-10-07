@@ -4,8 +4,18 @@ import { BsList, BsFillEnvelopeFill } from "react-icons/bs";
 import { AuthContext } from '../../context/context';
 
 export default function Header({ onClick }) {
-  const { notificacao, isVisible } = useContext(AuthContext);
-  const notificacoesPendentes = notificacao.filter(item => item.status === 0);
+  const { isVisible, getNotificacao } = useContext(AuthContext);
+  const [notificacao, setNotificacao] = useState([]);
+
+  useEffect(() => {
+    const run = async () => {
+      const { res1, res2 } = await getNotificacao();
+      const r1 = res2?.filter(item => item.status === 0);
+      setNotificacao(res1?.length + r1?.length);
+    };
+
+    run();
+  }, []);
 
   return (
     <Container>
@@ -23,8 +33,8 @@ export default function Header({ onClick }) {
       {isVisible(10) &&
         <div className="notification">
           <BsFillEnvelopeFill size={30} color='#fff' className='msg' />
-          {notificacoesPendentes.length > 0 && (
-            <span className="badge">{notificacoesPendentes.length}</span>
+          {notificacao > 0 && (
+            <span className="badge">{notificacao}</span>
           )}
         </div>
       }

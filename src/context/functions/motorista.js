@@ -8,7 +8,7 @@ export const sendMotorista = async (val) => {
         listMotorista()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -21,7 +21,7 @@ export const deleteMotorista = async (val) => {
         listMotorista()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -35,7 +35,7 @@ export const atualizarMotorista = async (val) => {
         listMotorista()
         return response.data;
     } catch (err) {
-        alert(err?.response?.data?.error)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };
@@ -46,7 +46,7 @@ export const listMotorista = async () => {
         //console.log(response.data);
         return response.data;
     } catch (err) {
-        console.log(err?.response)
+        alert("Erro: Entre em contato com desenvolvedor")
         return []
     }
 };

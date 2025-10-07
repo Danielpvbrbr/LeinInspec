@@ -29,10 +29,13 @@ export default function LineServicos({ key, data, onClick, run }) {
     >
       <section key={key} >
         <div>
-          <h4><strong>Oficina:</strong> {data.oficina}</h4>
-          <h4><strong>Data:</strong> {formatarDataBr(data.dataCreate).split(" ")[0]}</h4>
-          <h4><strong>Vencimento Garantia:</strong> {formatarDataBr(data.garantiaDate).split(" ")[0]}</h4>
-          <h4><strong>Descrição: </strong>{data.descricao}</h4>
+          <h4><strong>Oficina:</strong> {data?.oficina}</h4>
+          <h4><strong>Data:</strong> {formatarDataBr(data?.dataCreate).split(" ")[0]}</h4>
+          <h4><strong>Veiculo:</strong> {data?.veiculo}</h4>
+          <h4><strong>Placa:</strong> {data?.placa}</h4>
+          <h4><strong>KM:</strong> {data?.km}</h4>
+          <h4><strong>Vencimento Garantia:</strong> {formatarDataBr(data?.garantiaDate).split(" ")[0]}</h4>
+          <h4><strong>Descrição: </strong>{data?.descricao}</h4>
         </div>
         <h5>
           <BsPencil

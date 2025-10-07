@@ -64,9 +64,8 @@ exports.defeito_delete = async (req, res) => {
 };
 
 
-
 exports.defeito_atualizar = async (req, res) => {
-    const { descricao, veiculo, placa, responsavel, status, id } = req.body;
+    const { descricao, veiculo, placa, responsavel, status, solucao, id } = req.body;
 
     if (!id) {
         return res.status(400).json({ error: 'ID é obrigatório' });
@@ -75,8 +74,8 @@ exports.defeito_atualizar = async (req, res) => {
     try {
         if (status) {
             const [result] = await db.query(
-                `UPDATE defeito SET status=? WHERE id=?`,
-                [status, id]
+                `UPDATE defeito SET status=?, solucao=? WHERE id=?`,
+                [status, solucao,  id]
             );
 
             if (result.affectedRows === 0) {

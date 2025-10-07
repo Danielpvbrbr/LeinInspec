@@ -27,10 +27,11 @@ export default function Manutencao() {
   const [listServico, setListServico] = useState([])
   const [idItemServ, setIdItemServ] = useState("")
   const [km, setKm] = useState(0);
+  const [kmServ, setKmServ] = useState(0);
 
   const handleSubmit = async () => {
 
-    const servicesArray = JSON.stringify(listServico)
+    const servicesArray = JSON.stringify(listServico);
 
     if (veiculo && oficina) {
       if (id) {
@@ -82,6 +83,7 @@ export default function Manutencao() {
     setGarantiaDate("")
     setListServico([])
     setKm(0)
+    setKmServ(0)
   }
 
   function getValues(v) {
@@ -94,17 +96,17 @@ export default function Manutencao() {
     setGarantiaDate(v.garantiaDate ? v.garantiaDate.substring(0, 10) : '');
     setListServico(JSON.parse(v?.servicesArray))
     setKm(v.km)
+
   }
 
   function handleSend() {
-    const novoItem = { name: name, date: dateitem };
+    const novoItem = { name: name, date: dateitem, kmServ };
 
     if (/\d/.test(idItemServ)) {
       // Remover E add novo
       const novaLista = listServico
         .filter((_, i) => i !== idItemServ)
         .concat(novoItem);
-
       setListServico(novaLista);
     } else {
       setListServico([...listServico, novoItem]);
@@ -186,8 +188,18 @@ export default function Manutencao() {
               onChange={e => setDateitem(e.target.value)}
             />
           </section>
-
-          <BsEraserFill
+          <section>
+            <p>KM</p>
+            <InputKM
+              type='number'
+              value={kmServ}
+              maxLength={10}
+              placeholder='KM'
+              pattern="[0-9]*"
+              onChange={e => setKmServ(e.target.value)}
+            />
+          </section>
+          {/* <BsEraserFill
             color='#5886ca'
             size={40}
             cursor="pointer"
@@ -196,7 +208,7 @@ export default function Manutencao() {
               setDateitem("");
               setIdItemServ("")
             }}
-          />
+          /> */}
           {
             /\d/.test(idItemServ) ?
               <BsArrowRepeat
@@ -219,7 +231,7 @@ export default function Manutencao() {
         <ListServico>
           {listServico.map((v, i) =>
             <Line key={i} >
-              <p onClick={() => change(v, i)}>{v.name}</p>
+              <p onClick={() => change(v, i)}>{v.name} (Km: {v?.kmServ})</p>
               <span>
                 <input
                   type='date'

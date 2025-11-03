@@ -61,6 +61,12 @@ import {
     atualizarDefeito as atualizarDefeitoFunction,
     deleteDefeito as deleteDefeitoFunction
 } from "./functions/notificarDefeito";
+
+import {
+    sendAbastecimento as sendAbastecimentoFunction,
+    listAbasteciemnto as listAbastecimentoFunction
+} from "./functions/abastecimento";
+
 export const AuthContext = createContext({});
 
 export default function AuthProvider({ children }) {
@@ -110,6 +116,9 @@ export default function AuthProvider({ children }) {
     const atualizarDefeito = (val) => atualizarDefeitoFunction(val);
     const deleteDefeito = (val) => deleteDefeitoFunction(val);
 
+    const sendAbastecimento = (val) => sendAbastecimentoFunction(val);
+    const listAbastecimento = () => listAbastecimentoFunction();
+
     useEffect(() => {
         const token = localStorage.getItem("auth");
         if (token) {
@@ -117,8 +126,7 @@ export default function AuthProvider({ children }) {
             setAuth(cookie);
 
             if (expirado(cookie.exp)) {
-                // alert("Tempo expirado!");
-                logout(); // Aqui é logout, não deslogar
+                logout();
             }
         }
         getlistDefeito()
@@ -193,7 +201,9 @@ export default function AuthProvider({ children }) {
                 deleteDefeito,
                 isVisible,
                 getlistDefeito,
-                getNotificacao
+                getNotificacao,
+                sendAbastecimento,
+                listAbastecimento
             }}
         >
             {children}

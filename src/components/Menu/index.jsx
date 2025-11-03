@@ -132,6 +132,14 @@ export default function Menu({ isMenu, setisMenu, setMenuSelect }) {
               </span>
             </Line>
           }
+
+          {isVisible(11) &&
+            <Line>
+              <span onClick={() => { setMenuSelect(10); setisMenu(false) }}>
+                <h4>Abastecimento</h4>
+              </span>
+            </Line>
+          }
         </ListLine>
 
         {/* <section>

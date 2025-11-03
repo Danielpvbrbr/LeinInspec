@@ -34,9 +34,9 @@ export default function Search({
         />
       </span>
 
-      <div onClick={() => gerarPDF({ listCheck })}>
+      {/* <div onClick={() => gerarPDF({ listCheck })}>
         <BsFiletypePdf cursor="pointer" color='#9b1515' size={24} />
-      </div>
+      </div> */}
     </Container>
   )
 }

@@ -25,7 +25,6 @@ export const sendDefeito = async (val, listManutencao) => {
     }
 };
 
-
 export const deleteDefeito = async (val) => {
     try {
         const response = await api.post('/defeito/delete', val);

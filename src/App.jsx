@@ -6,6 +6,7 @@ import Inicio from './views/inicio';
 import Motoristas from './views/motoristas';
 import Veiculos from './views/veiculos';
 import Checklist from './views/checklist';
+import CheckoutAbastec from './components/CheckoutAbastec'
 import Usuarios from './views/usuarios';
 import Manutencao from './views/manutencao';
 import Oficina from './views/oficina';
@@ -17,14 +18,16 @@ import Notificacao from './views/notificacao';
 import usePWAInstall from './components/usePWAInstall';
 
 import { AuthContext } from './context/context';
+import VerificarAbastecimento from './views/verificarAbastecimento';
 
 export default function App() {
   const { isAuthenticated } = useContext(AuthContext)
   const [isMenu, setisMenu] = useState(false)
   const [isForm, setIsForm] = useState(false)
+  const [isForm2, setIsForm2] = useState(false)
   const [menuSelect, setMenuSelect] = useState(0)
- const { canInstall, installApp } = usePWAInstall();
- 
+  const { canInstall, installApp } = usePWAInstall();
+
   const active = () => {
     switch (menuSelect) {
       case 0:
@@ -47,6 +50,8 @@ export default function App() {
         return <Verificar setIsForm={setIsForm} />
       case 9:
         return <Notificacao />
+      case 10:
+        return <VerificarAbastecimento setIsForm2={setIsForm2} isForm2={isForm2}/>
     }
   }
 
@@ -65,10 +70,13 @@ export default function App() {
             setisMenu={setisMenu}
             setMenuSelect={setMenuSelect}
           />
-
           <Checkout
             isForm={isForm}
             setIsForm={setIsForm}
+          />
+          <CheckoutAbastec
+            isForm2={isForm2}
+            setIsForm2={setIsForm2}
           />
         </>
         :
@@ -83,7 +91,7 @@ export default function App() {
               border: "none",
               cursor: "pointer"
             }}>
-              Instalar App 📲
+              Instalar App
             </button>
           )}
         </>

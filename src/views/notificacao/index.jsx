@@ -30,7 +30,6 @@ export default function Notificacao() {
       return alert("Favor preencher um número maior maior de caracteres!")
     }
 
-
     if (v.id && solucao.length >= 10) {
       const res = await atualizarDefeito({
         status: 1,
@@ -101,6 +100,7 @@ export default function Notificacao() {
           </LineNot>
         ))}
       </List>
+
       {isConfirm &&
         <Confirm>
           <BsXCircleFill
@@ -119,7 +119,6 @@ export default function Notificacao() {
           <button onClick={() => submit(isConfirm)}>Finalizar</button>
         </Confirm>
       }
-
     </Container>
   );
 }

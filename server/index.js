@@ -13,9 +13,10 @@ const { oficina_listar, oficina_register, oficina_delete, oficina_atualizar } = 
 const { manute_listar, manute_register, manute_delete, manute_atualizar } = require('./routes/manutencao');
 const { defeito_listar, defeito_register, defeito_delete, defeito_atualizar } = require('./routes/notificarDefeito');
 const { senNotificacao } = require('./routes/notificacao');
+const { abastecimento_listar, abastecimento_register } = require('./routes/abastecimento');
 
 app.use(cors())
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 
 const distPath = path.join(__dirname, 'dist'); //Modo Deploy
 app.use(express.static(distPath)); //Modo Deploy
@@ -61,6 +62,10 @@ app.post("/defeito/delete", defeito_delete)
 app.post("/defeito/atualizar", defeito_atualizar)
 
 app.get("/notificacao", senNotificacao);
+
+
+app.get("/abastecimento/listar", abastecimento_listar)
+app.post("/abastecimento/register", abastecimento_register)
 
 app.get('*', (req, res) => { //Modo deploy
     res.sendFile(path.join(distPath, 'index.html'));
